@@ -1192,6 +1192,150 @@
     .quick-amounts { gap: 6px; }
     .quick-amt-btn { padding: 8px 16px; font-size: 16px; }
   }
+  /* ===== DONATE MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 30px 26px 26px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+    animation: modal-in 0.25s ease-out;
+  }
+
+  @keyframes modal-in {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: #F0F0F0;
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #718096;
+    transition: background 0.15s;
+  }
+
+  .modal-close:hover { background: #E2E8F0; }
+
+  .modal-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .modal-subtitle {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    color: #999;
+    margin-bottom: 18px;
+  }
+
+  .modal-tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #FFF0F8, #EBF8FF);
+    border: 2px solid #FFB3D9;
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: var(--dark);
+    margin-bottom: 18px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .modal-input:focus { border-color: var(--pink-pop); }
+
+  .modal-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: var(--dark);
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .modal-textarea:focus { border-color: var(--pink-pop); }
+
+  .modal-submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--pink-pop), #E91E63);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 19px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(255,107,157,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .modal-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(255,107,157,0.5); }
+  .modal-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .modal-status {
+    margin-top: 10px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    text-align: center;
+    min-height: 22px;
+  }
+
+  .modal-status.success { color: #2E7D32; }
+  .modal-status.error   { color: #C62828; }
+
+  .modal-required-note {
+    font-size: 12px;
+    color: #A0AEC0;
+    margin-bottom: 14px;
+  }
+
 </style>
 </head>
 <body>
@@ -1353,9 +1497,9 @@
             </div>
           </div>
         </div>
-        <a href="https://square.link/u/l9uHyVIh" class="tier-donate-btn btn-splash" target="_blank" rel="noopener">
-          Donate $10 — Make a Splash 💧 <span class="sq-icon">⬛</span>
-        </a>
+        <button onclick="openModal('💧 The Splash — $10')" class="tier-donate-btn btn-splash">
+          Donate $10 — Make a Splash 💧
+        </button>
       </div>
 
       <div class="reward-card tier-cannonball">
@@ -1372,9 +1516,9 @@
             </div>
           </div>
         </div>
-        <a href="https://square.link/u/l9uHyVIh" class="tier-donate-btn btn-cannonball" target="_blank" rel="noopener">
-          Donate $25 — CANNONBALL! 💣 <span class="sq-icon">⬛</span>
-        </a>
+        <button onclick="openModal('💣 The Cannonball — $25')" class="tier-donate-btn btn-cannonball">
+          Donate $25 — CANNONBALL! 💣
+        </button>
       </div>
 
       <div class="reward-card tier-belly">
@@ -1391,9 +1535,9 @@
             </div>
           </div>
         </div>
-        <a href="https://square.link/u/l9uHyVIh0" class="tier-donate-btn btn-belly" target="_blank" rel="noopener">
-          Donate $50 — Belly Flop Time 🤿 <span class="sq-icon">⬛</span>
-        </a>
+        <button onclick="openModal('🤿 The Belly Flop — $50')" class="tier-donate-btn btn-belly">
+          Donate $50 — Belly Flop Time 🤿
+        </button>
       </div>
 
       <div class="reward-card tier-shark">
@@ -1410,9 +1554,9 @@
             </div>
           </div>
         </div>
-        <a href="https://square.link/u/l9uHyVIh0" class="tier-donate-btn btn-shark" target="_blank" rel="noopener">
-          Donate $100 — Go Full Shark 🦈 <span class="sq-icon">⬛</span>
-        </a>
+        <button onclick="openModal('🦈 The Shark — $100')" class="tier-donate-btn btn-shark">
+          Donate $100 — Go Full Shark 🦈
+        </button>
       </div>
 
       <div class="reward-card tier-whale">
@@ -1429,9 +1573,9 @@
             </div>
           </div>
         </div>
-        <a href="https://square.link/u/l9uHyVIh" class="tier-donate-btn btn-whale" target="_blank" rel="noopener">
-          Donate $200+ — Whale Status 🐳 <span class="sq-icon">⬛</span>
-        </a>
+        <button onclick="openModal('🐳 The Whale — $200+')" class="tier-donate-btn btn-whale">
+          Donate $200+ — Whale Status 🐳
+        </button>
       </div>
 
     </div>
@@ -1446,7 +1590,7 @@
       <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$15</a>
       <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$35</a>
       <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$75</a>
-      <a href="https://square.link/u/l9uHyVIh0" class="quick-amt-btn" target="_blank" rel="noopener">$150</a>
+      <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$150</a>
     </div>
     <a href="https://square.link/u/l9uHyVIh" class="custom-send-btn" target="_blank" rel="noopener">
       💚 Choose Your Own Amount 💚
@@ -1643,33 +1787,7 @@
   <!-- BIRTHDAY WALL -->
   <div class="birthday-wall-section anim-in" id="birthday-wall">
     <h2 class="section-label">🎂 Birthday Wall — Leave Gabby a Note!</h2>
-    <p class="wall-intro">
-      <strong>Step 1:</strong> Donate using any button above — Square will ask you for a birthday message during checkout (it goes to Tata privately). 🔒<br>
-      <strong>Step 2:</strong> Come back here and post your message below so the <em>whole family</em> can see it on the wall! 🌟
-    </p>
-
-    <!-- SUBMIT FORM -->
-    <div class="wall-form">
-      <h4>✍️ Write Your Message</h4>
-      <div class="form-row">
-        <input type="text" id="wall-name" class="form-input" placeholder="Your name (e.g. Uncle Ray)" maxlength="50">
-        <input type="text" id="wall-from" class="form-input" placeholder="Where are you from? (optional)" maxlength="50">
-      </div>
-      <textarea id="wall-message" class="form-textarea" placeholder="Happy birthday Gabby! Can't wait to do a cannonball at your pool party! 🎉" maxlength="300"></textarea>
-      <select id="wall-tier" class="tier-select">
-        <option value="">🏊 Which tier did you donate? (optional)</option>
-        <option value="💧 The Splash — $10">💧 The Splash — $10</option>
-        <option value="💣 The Cannonball — $25">💣 The Cannonball — $25</option>
-        <option value="🤿 The Belly Flop — $50">🤿 The Belly Flop — $50</option>
-        <option value="🦈 The Shark — $100">🦈 The Shark — $100</option>
-        <option value="🐳 The Whale — $200+">🐳 The Whale — $200+</option>
-        <option value="💚 Custom Amount">💚 Custom Amount</option>
-      </select>
-      <button class="wall-submit-btn" id="wall-submit-btn" onclick="submitMessage()">
-        🎉 Post My Birthday Message!
-      </button>
-      <div class="submit-status" id="submit-status"></div>
-    </div>
+    <p class="wall-intro">Messages left by the family — your note gets posted automatically when you donate using one of the tier buttons above! 💌</p>
 
     <!-- MESSAGES DISPLAY -->
     <div class="wall-messages-header">💝 Messages from the Family <span id="message-count" style="font-family:'Quicksand',sans-serif;font-size:14px;color:#999;font-weight:600;"></span></div>
@@ -1725,6 +1843,24 @@
     </div>
   </div>
 
+  <!-- DONATE MODAL -->
+  <div class="modal-overlay" id="donate-modal" onclick="handleOverlayClick(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+      <div class="modal-title">🎉 Leave Gabby a Note!</div>
+      <div class="modal-subtitle">Your message posts to the Birthday Wall, then we'll take you to Square to donate.</div>
+      <div class="modal-tier-badge" id="modal-tier-badge"></div>
+      <p class="modal-required-note">* Name and birthday message are required</p>
+      <input type="text" id="modal-name" class="modal-input" placeholder="Your name * (e.g. Uncle Billy)" maxlength="50">
+      <input type="text" id="modal-from" class="modal-input" placeholder="Where are you from? (optional)" maxlength="50">
+      <textarea id="modal-message" class="modal-textarea" placeholder="Happy birthday Gabby! Can't wait to splash around at your party! 🎉" maxlength="300"></textarea>
+      <button class="modal-submit-btn" id="modal-submit-btn" onclick="modalSubmit()">
+        🎂 Post Message &amp; Go Donate!
+      </button>
+      <div class="modal-status" id="modal-status"></div>
+    </div>
+  </div>
+
   <!-- FINE PRINT -->
   <div class="fine-print">
     <div class="fun-note">🦩 No flamingos were harmed in the making of this fundraiser 🦩</div>
@@ -1737,44 +1873,95 @@
 </div>
 
 <script>
-  // =============================================
-  // SUPABASE CONFIG — replace these two values!
-  // =============================================
-  const SUPABASE_URL    = 'https://hgynvqhososbxgkmdspm.supabase.co';
+  const SUPABASE_URL     = 'https://hgynvqhososbxgkmdspm.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_4DFSbmDLuSVJ5ITbeeulaQ_KRb57yJo';
+  const SQUARE_URL       = 'https://square.link/u/l9uHyVIh';
 
   const API_URL = `${SUPABASE_URL}/rest/v1/messages`;
-  const headers = {
+  const dbHeaders = {
     'apikey': SUPABASE_ANON_KEY,
     'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
     'Content-Type': 'application/json',
     'Prefer': 'return=representation'
   };
 
-  // Load messages on page load
-  async function loadMessages() {
-    const list = document.getElementById('wall-messages-list');
-    const countEl = document.getElementById('message-count');
+  let currentTier = '';
 
-    // Not configured yet — show sample preview
-    if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
-      list.innerHTML = `
-        <div class="wall-message-card">
-          <div class="wm-top"><span class="wm-name">👴 Tata</span><span class="wm-tier">🦈 The Shark — $100</span></div>
-          <div class="wm-message">"Happy birthday mija! This pool is all yours. Tata loves you to the moon! 🫶"</div>
-          <div class="wm-date">Sample message — connect Supabase to go live!</div>
-        </div>
-        <div class="wall-message-card">
-          <div class="wm-top"><span class="wm-name">👵 Nana</span><span class="wm-tier">🦈 The Shark — $100</span></div>
-          <div class="wm-message">"My sweet Gabby girl! Enjoy every single splash. We love you so much! 💖"</div>
-          <div class="wm-date">Sample message — connect Supabase to go live!</div>
-        </div>`;
-      countEl.textContent = '(sample preview)';
-      return;
-    }
+  // ── MODAL ──────────────────────────────────────
+  function openModal(tier) {
+    currentTier = tier;
+    document.getElementById('modal-tier-badge').textContent = tier;
+    document.getElementById('modal-name').value    = '';
+    document.getElementById('modal-from').value    = '';
+    document.getElementById('modal-message').value = '';
+    document.getElementById('modal-status').textContent = '';
+    document.getElementById('modal-status').className   = 'modal-status';
+    document.getElementById('modal-submit-btn').disabled = false;
+    document.getElementById('modal-submit-btn').textContent = '🎂 Post Message & Go Donate!';
+    document.getElementById('donate-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('modal-name').focus(), 100);
+  }
+
+  function closeModal() {
+    document.getElementById('donate-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('donate-modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── SUBMIT from modal ──────────────────────────
+  async function modalSubmit() {
+    const name    = document.getElementById('modal-name').value.trim();
+    const from    = document.getElementById('modal-from').value.trim();
+    const message = document.getElementById('modal-message').value.trim();
+    const btn     = document.getElementById('modal-submit-btn');
+    const status  = document.getElementById('modal-status');
+
+    if (!name)    { setModalStatus('Please enter your name! 😊', 'error'); return; }
+    if (!message) { setModalStatus('Please write a birthday message for Gabby! 🎀', 'error'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Saving your message...';
 
     try {
-      const res = await fetch(`${API_URL}?order=created_at.desc`, { headers });
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: dbHeaders,
+        body: JSON.stringify({ name, from_location: from, message, tier: currentTier })
+      });
+
+      if (!res.ok) throw new Error();
+
+      // Message saved — now close modal, reload wall, open Square
+      closeModal();
+      loadMessages();
+      window.open(SQUARE_URL, '_blank');
+
+    } catch(e) {
+      btn.disabled = false;
+      btn.textContent = '🎂 Post Message & Go Donate!';
+      setModalStatus('Something went wrong — please try again! 💙', 'error');
+    }
+  }
+
+  function setModalStatus(msg, type) {
+    const el = document.getElementById('modal-status');
+    el.textContent = msg;
+    el.className = `modal-status ${type}`;
+  }
+
+  // ── BIRTHDAY WALL ─────────────────────────────
+  async function loadMessages() {
+    const list    = document.getElementById('wall-messages-list');
+    const countEl = document.getElementById('message-count');
+
+    try {
+      const res  = await fetch(`${API_URL}?order=created_at.desc`, { headers: dbHeaders });
       const data = await res.json();
 
       if (!Array.isArray(data) || data.length === 0) {
@@ -1800,54 +1987,6 @@
     } catch(e) {
       list.innerHTML = `<div class="wall-empty">Couldn't load messages right now. Try refreshing! 🌊</div>`;
     }
-  }
-
-  async function submitMessage() {
-    const name    = document.getElementById('wall-name').value.trim();
-    const from    = document.getElementById('wall-from').value.trim();
-    const message = document.getElementById('wall-message').value.trim();
-    const tier    = document.getElementById('wall-tier').value;
-    const btn     = document.getElementById('wall-submit-btn');
-
-    if (!name)    { showStatus('Please enter your name! 😊', 'error'); return; }
-    if (!message) { showStatus('Please write a message for Gabby! 🎀', 'error'); return; }
-
-    if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
-      showStatus('⚙️ Supabase not connected yet — see setup instructions below!', 'error');
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Posting...';
-
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ name, from_location: from, message, tier })
-      });
-
-      if (!res.ok) throw new Error();
-
-      document.getElementById('wall-name').value = '';
-      document.getElementById('wall-from').value = '';
-      document.getElementById('wall-message').value = '';
-      document.getElementById('wall-tier').value = '';
-      showStatus('🎉 Your message is up on the wall! Gabby will love it!', 'success');
-      await loadMessages();
-    } catch(e) {
-      showStatus('Something went wrong — please try again! 💙', 'error');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = '🎉 Post My Birthday Message!';
-    }
-  }
-
-  function showStatus(msg, type) {
-    const el = document.getElementById('submit-status');
-    el.textContent = msg;
-    el.className = `submit-status ${type}`;
-    setTimeout(() => { el.textContent = ''; el.className = 'submit-status'; }, 5000);
   }
 
   function escHtml(str) {
