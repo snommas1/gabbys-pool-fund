@@ -920,6 +920,220 @@
   .fee-free   { background: #C6F6D5; color: #276749; }
   .fee-small  { background: #FEF3C7; color: #92400E; }
 
+  /* ===== BIRTHDAY WALL ===== */
+  .birthday-wall-section {
+    background: linear-gradient(135deg, #FFF0F8, #F0F8FF);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+    border: 2px solid #FFB3D9;
+  }
+
+  .wall-intro {
+    font-size: 15px;
+    color: #718096;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  /* Submit form */
+  .wall-form {
+    background: white;
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 3px 14px rgba(255,107,157,0.1);
+    border: 1.5px solid #FFD6EC;
+  }
+
+  .wall-form h4 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .form-input {
+    flex: 1;
+    min-width: 140px;
+    padding: 11px 14px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--pink-pop); }
+
+  .form-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: var(--dark);
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 10px;
+  }
+
+  .form-textarea:focus { border-color: var(--pink-pop); }
+
+  .tier-select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: var(--dark);
+    background: white;
+    outline: none;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+
+  .wall-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--pink-pop), #E91E63);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(255,107,157,0.35);
+  }
+
+  .wall-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,157,0.45); }
+  .wall-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .submit-status {
+    margin-top: 10px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    text-align: center;
+    min-height: 24px;
+  }
+
+  .submit-status.success { color: #2E7D32; }
+  .submit-status.error   { color: #C62828; }
+
+  /* Messages display */
+  .wall-messages-header {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .wall-loading {
+    text-align: center;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    color: #B0BEC5;
+    padding: 20px;
+  }
+
+  .wall-messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .wall-message-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--pink-pop);
+    animation: fade-up 0.4s ease-out both;
+  }
+
+  .wall-message-card:nth-child(odd)  { border-left-color: var(--sky-blue); }
+  .wall-message-card:nth-child(even) { border-left-color: var(--pink-pop); }
+  .wall-message-card:nth-child(3n)   { border-left-color: var(--sunny); }
+
+  .wm-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .wm-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: var(--dark);
+  }
+
+  .wm-tier {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--purple-fizz);
+    background: #F3E5FF;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .wm-message {
+    font-size: 15px;
+    color: #4A5568;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .wm-date {
+    font-size: 11px;
+    color: #CBD5E0;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  .wall-empty {
+    text-align: center;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 17px;
+    color: #B0BEC5;
+    padding: 24px;
+  }
+
+  .airtable-setup-note {
+    background: #FFF8E1;
+    border: 2px dashed #FFB74D;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #5D4037;
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+
+  .airtable-setup-note strong { color: #E65100; }
+  .airtable-setup-note code { background: rgba(255,255,255,0.7); padding: 1px 5px; border-radius: 4px; font-size: 12px; word-break: break-all; }
+
   /* ===== FINE PRINT ===== */
   .fine-print {
     text-align: center;
@@ -1396,7 +1610,58 @@
     🎉 Donate to Gabby's Pool Fund 🎉
   </a>
 
+  <!-- BIRTHDAY WALL -->
+  <div class="birthday-wall-section anim-in">
+    <h2 class="section-label">🎂 Birthday Wall — Leave Gabby a Note!</h2>
+    <p class="wall-intro">Already donated? Leave Gabby a birthday message! Every note shows up on the wall below for the whole family to see. 💌</p>
+
+    <!-- SUBMIT FORM -->
+    <div class="wall-form">
+      <h4>✍️ Write Your Message</h4>
+      <div class="form-row">
+        <input type="text" id="wall-name" class="form-input" placeholder="Your name (e.g. Uncle Ray)" maxlength="50">
+        <input type="text" id="wall-from" class="form-input" placeholder="Where are you from? (optional)" maxlength="50">
+      </div>
+      <textarea id="wall-message" class="form-textarea" placeholder="Happy birthday Gabby! Can't wait to do a cannonball at your pool party! 🎉" maxlength="300"></textarea>
+      <select id="wall-tier" class="tier-select">
+        <option value="">🏊 Which tier did you donate? (optional)</option>
+        <option value="💧 The Splash — $10">💧 The Splash — $10</option>
+        <option value="💣 The Cannonball — $25">💣 The Cannonball — $25</option>
+        <option value="🤿 The Belly Flop — $50">🤿 The Belly Flop — $50</option>
+        <option value="🦈 The Shark — $100">🦈 The Shark — $100</option>
+        <option value="🐳 The Whale — $200+">🐳 The Whale — $200+</option>
+        <option value="💚 Custom Amount">💚 Custom Amount</option>
+      </select>
+      <button class="wall-submit-btn" id="wall-submit-btn" onclick="submitMessage()">
+        🎉 Post My Birthday Message!
+      </button>
+      <div class="submit-status" id="submit-status"></div>
+    </div>
+
+    <!-- MESSAGES DISPLAY -->
+    <div class="wall-messages-header">💝 Messages from the Family <span id="message-count" style="font-family:'Quicksand',sans-serif;font-size:14px;color:#999;font-weight:600;"></span></div>
+    <div id="wall-messages-list" class="wall-messages-list">
+      <div class="wall-loading">Loading messages... 🌊</div>
+    </div>
+
+    <!-- AIRTABLE SETUP INSTRUCTIONS (delete before sharing) -->
+    <div class="airtable-setup-note" id="airtable-setup-note">
+      <strong>🔧 Setup: Connect Airtable (delete this box before sharing!)</strong><br><br>
+      1. Go to <strong>airtable.com</strong> → Sign up free → Create a base called <strong>"Gabby's Pool Wall"</strong><br>
+      2. Create a table called <strong>Messages</strong> with these fields:<br>
+      &nbsp;&nbsp;• <code>Name</code> (Single line text)<br>
+      &nbsp;&nbsp;• <code>From</code> (Single line text)<br>
+      &nbsp;&nbsp;• <code>Message</code> (Long text)<br>
+      &nbsp;&nbsp;• <code>Tier</code> (Single line text)<br>
+      3. Go to <strong>airtable.com/create/tokens</strong> → Create a token with <code>data.records:read</code> and <code>data.records:write</code> scopes for your base<br>
+      4. Find your <strong>Base ID</strong>: it's in the URL when you open your base → <code>airtable.com/BASE_ID_HERE/...</code><br>
+      5. Replace <code>YOUR_AIRTABLE_TOKEN</code> and <code>YOUR_BASE_ID</code> in the &lt;script&gt; at the bottom of this file<br>
+      6. Delete this yellow box!
+    </div>
+  </div>
+
   <!-- SETUP GUIDE -->
+
   <div class="setup-guide">
     <h3>🔧 Setup Checklist (delete this section before sharing!)</h3>
     <div class="setup-step">
@@ -1440,5 +1705,135 @@
 
 </div>
 
+<script>
+  // =============================================
+  // AIRTABLE CONFIG — replace these two values!
+  // =============================================
+  const AIRTABLE_TOKEN = 'YOUR_AIRTABLE_TOKEN';
+  const BASE_ID        = 'YOUR_BASE_ID';
+  const TABLE_NAME     = 'Messages';
+  const API_URL        = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
+
+  const headers = {
+    'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+    'Content-Type': 'application/json'
+  };
+
+  // Load messages on page load
+  async function loadMessages() {
+    const list = document.getElementById('wall-messages-list');
+    const countEl = document.getElementById('message-count');
+
+    // If not configured yet, show sample messages
+    if (AIRTABLE_TOKEN === 'YOUR_AIRTABLE_TOKEN') {
+      list.innerHTML = `
+        <div class="wall-message-card">
+          <div class="wm-top"><span class="wm-name">👴 Tata</span><span class="wm-tier">🦈 The Shark — $100</span></div>
+          <div class="wm-message">"Happy birthday mija! This pool is all yours. Tata loves you to the moon! 🫶"</div>
+          <div class="wm-date">Sample message — connect Airtable to go live!</div>
+        </div>
+        <div class="wall-message-card">
+          <div class="wm-top"><span class="wm-name">👵 Nana</span><span class="wm-tier">🦈 The Shark — $100</span></div>
+          <div class="wm-message">"My sweet Gabby girl! Enjoy every single splash. We love you so much! 💖"</div>
+          <div class="wm-date">Sample message — connect Airtable to go live!</div>
+        </div>
+      `;
+      countEl.textContent = '(sample preview)';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}?sort[0][field]=Created&sort[0][direction]=desc`, { headers });
+      const data = await res.json();
+
+      if (!data.records || data.records.length === 0) {
+        list.innerHTML = `<div class="wall-empty">No messages yet — be the first to leave one! 🎉</div>`;
+        countEl.textContent = '';
+        return;
+      }
+
+      countEl.textContent = `(${data.records.length} message${data.records.length !== 1 ? 's' : ''})`;
+
+      list.innerHTML = data.records.map(r => {
+        const f = r.fields;
+        const name = f.Name || 'Anonymous';
+        const from = f.From ? ` · ${f.From}` : '';
+        const msg  = f.Message || '';
+        const tier = f.Tier || '';
+        const date = r.createdTime ? new Date(r.createdTime).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+        return `
+          <div class="wall-message-card">
+            <div class="wm-top">
+              <span class="wm-name">💌 ${escHtml(name)}${escHtml(from)}</span>
+              ${tier ? `<span class="wm-tier">${escHtml(tier)}</span>` : ''}
+            </div>
+            <div class="wm-message">"${escHtml(msg)}"</div>
+            ${date ? `<div class="wm-date">${date}</div>` : ''}
+          </div>`;
+      }).join('');
+    } catch(e) {
+      list.innerHTML = `<div class="wall-empty">Couldn't load messages right now. Try refreshing! 🌊</div>`;
+    }
+  }
+
+  async function submitMessage() {
+    const name    = document.getElementById('wall-name').value.trim();
+    const from    = document.getElementById('wall-from').value.trim();
+    const message = document.getElementById('wall-message').value.trim();
+    const tier    = document.getElementById('wall-tier').value;
+    const btn     = document.getElementById('wall-submit-btn');
+    const status  = document.getElementById('submit-status');
+
+    if (!name) { showStatus('Please enter your name! 😊', 'error'); return; }
+    if (!message) { showStatus('Please write a message for Gabby! 🎀', 'error'); return; }
+
+    if (AIRTABLE_TOKEN === 'YOUR_AIRTABLE_TOKEN') {
+      showStatus('⚙️ Airtable not connected yet — see the setup instructions below!', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Posting...';
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ fields: { Name: name, From: from, Message: message, Tier: tier } })
+      });
+
+      if (!res.ok) throw new Error();
+
+      // Clear form
+      document.getElementById('wall-name').value = '';
+      document.getElementById('wall-from').value = '';
+      document.getElementById('wall-message').value = '';
+      document.getElementById('wall-tier').value = '';
+      showStatus('🎉 Your message is up on the wall! Gabby will love it!', 'success');
+      await loadMessages();
+    } catch(e) {
+      showStatus('Something went wrong — please try again! 💙', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '🎉 Post My Birthday Message!';
+    }
+  }
+
+  function showStatus(msg, type) {
+    const el = document.getElementById('submit-status');
+    el.textContent = msg;
+    el.className = `submit-status ${type}`;
+    setTimeout(() => { el.textContent = ''; el.className = 'submit-status'; }, 5000);
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Load on page open
+  loadMessages();
+  // Auto-refresh every 60 seconds
+  setInterval(loadMessages, 60000);
+</script>
 </body>
 </html>
