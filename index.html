@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabby's Big Splash Fund 🏊‍♀️</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink-pop: #FF6B9D;
+    --sky-blue: #4FC3F7;
+    --sunny: #FFD54F;
+    --mint: #81E6D9;
+    --purple-fizz: #B388FF;
+    --coral: #FF8A80;
+    --white: #FFFFFF;
+    --dark: #2D3748;
+    --light-bg: #FFF8F0;
+    --water-dark: #0288D1;
+    --water-light: #E1F5FE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--light-bg);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== WATER WAVE HEADER ===== */
+  .header-zone {
+    position: relative;
+    background: linear-gradient(135deg, var(--sky-blue) 0%, #039BE5 50%, var(--water-dark) 100%);
+    padding: 40px 20px 100px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header-zone::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .bubbles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    animation: float-up 6s ease-in infinite;
+  }
+
+  .bubble:nth-child(1) { width: 20px; height: 20px; left: 10%; animation-delay: 0s; animation-duration: 5s; }
+  .bubble:nth-child(2) { width: 35px; height: 35px; left: 25%; animation-delay: 1.5s; animation-duration: 7s; }
+  .bubble:nth-child(3) { width: 15px; height: 15px; left: 45%; animation-delay: 0.8s; animation-duration: 4.5s; }
+  .bubble:nth-child(4) { width: 28px; height: 28px; left: 65%; animation-delay: 2.5s; animation-duration: 6s; }
+  .bubble:nth-child(5) { width: 18px; height: 18px; left: 80%; animation-delay: 0.3s; animation-duration: 5.5s; }
+  .bubble:nth-child(6) { width: 25px; height: 25px; left: 90%; animation-delay: 1.8s; animation-duration: 4s; }
+
+  @keyframes float-up {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+  }
+
+  .mock-badge {
+    display: inline-block;
+    background: var(--coral);
+    color: white;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 13px;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  .header-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(32px, 7vw, 58px);
+    color: var(--white);
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .header-sub {
+    font-family: 'Patrick Hand', cursive;
+    font-size: clamp(18px, 4vw, 26px);
+    color: var(--sunny);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 6px;
+  }
+
+  .header-location {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+  }
+
+  .pool-emoji-row {
+    font-size: clamp(36px, 8vw, 64px);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 12px;
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .wave-divider {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .main-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+    position: relative;
+    z-index: 4;
+  }
+
+  /* ===== PHOTO PLACEHOLDER ===== */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+    margin: -40px 0 28px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .photo-box {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 3px dashed var(--sky-blue);
+  }
+
+  .photo-box.main { min-height: 220px; }
+  .photo-box.side { min-height: 105px; }
+
+  .photo-box .placeholder-text {
+    font-family: 'Patrick Hand', cursive;
+    color: var(--sky-blue);
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .photo-box .placeholder-emoji {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .side-stack { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ===== VISITOR COUNTER ===== */
+  .visitor-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #EDE7F6, #E8EAF6);
+    border-radius: 14px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    border: 2px solid var(--purple-fizz);
+  }
+
+  .visitor-counter .vc-icon {
+    font-size: 28px;
+    animation: pulse-eye 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-eye {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  .visitor-counter .vc-text {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #5C6BC0;
+  }
+
+  .visitor-counter .vc-number {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    color: #311B92;
+    display: inline-flex;
+    gap: 3px;
+  }
+
+  .vc-digit {
+    background: var(--white);
+    padding: 2px 7px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    min-width: 26px;
+    text-align: center;
+  }
+
+  .visitor-counter .vc-subtext {
+    font-size: 12px;
+    color: #9FA8DA;
+    font-weight: 600;
+  }
+
+  .vc-globe-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .vc-flag { font-size: 16px; opacity: 0.8; }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+  }
+
+  .progress-amounts {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .raised-amount {
+    font-family: 'Fredoka One', cursive;
+    font-size: 32px;
+    color: var(--pink-pop);
+  }
+
+  .goal-amount {
+    font-size: 15px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  .progress-bar-track {
+    width: 100%;
+    height: 22px;
+    background: #EDF2F7;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--sky-blue), var(--mint), var(--sunny));
+    width: 0%;
+    animation: fill-bar 2s ease-out 0.5s forwards;
+    position: relative;
+  }
+
+  .progress-bar-fill::after {
+    content: '🏊‍♀️';
+    position: absolute;
+    right: -8px;
+    top: -6px;
+    font-size: 28px;
+    animation: swim 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes fill-bar { to { width: 23%; } }
+  @keyframes swim { 0% { transform: rotate(-8deg); } 100% { transform: rotate(8deg); } }
+
+  .progress-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #718096;
+    font-weight: 600;
+  }
+
+  .progress-stats span { display: flex; align-items: center; gap: 4px; }
+
+  .deadline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFF3E0;
+    color: #E65100;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* ===== DONATE BUTTON ===== */
+  .big-donate-btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--pink-pop), #E91E63);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    cursor: pointer;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 20px rgba(255,107,157,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .big-donate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,107,157,0.5);
+  }
+
+  /* ===== STORY SECTION ===== */
+  .story-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+  }
+
+  .section-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    color: var(--water-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .story-text {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #4A5568;
+  }
+
+  .story-text p { margin-bottom: 14px; }
+
+  .story-text .highlight {
+    background: linear-gradient(to top, var(--sunny) 40%, transparent 40%);
+    padding: 0 2px;
+    font-weight: 700;
+  }
+
+  .story-text .callout {
+    background: var(--water-light);
+    border-left: 4px solid var(--sky-blue);
+    padding: 14px 18px;
+    border-radius: 0 12px 12px 0;
+    margin: 18px 0;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 18px;
+    color: var(--water-dark);
+  }
+
+  .tata-sig {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 20px;
+    color: var(--dark);
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  /* ===== REWARD TIERS ===== */
+  .rewards-section { margin-bottom: 24px; }
+
+  .rewards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .reward-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border-left: 5px solid;
+    transition: transform 0.2s;
+  }
+
+  .reward-card:hover { transform: translateY(-3px); }
+
+  .reward-card.tier-splash { border-left-color: var(--sky-blue); }
+  .reward-card.tier-cannonball { border-left-color: var(--sunny); }
+  .reward-card.tier-belly { border-left-color: var(--coral); }
+  .reward-card.tier-shark { border-left-color: var(--purple-fizz); }
+  .reward-card.tier-whale { border-left-color: var(--pink-pop); }
+
+  .reward-top {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .reward-emoji {
+    font-size: 38px;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F7FAFC;
+    border-radius: 14px;
+  }
+
+  .reward-info { flex: 1; }
+
+  .reward-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .reward-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: var(--dark);
+  }
+
+  .reward-price {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: var(--pink-pop);
+    white-space: nowrap;
+  }
+
+  .reward-desc {
+    font-size: 14px;
+    color: #718096;
+    line-height: 1.5;
+  }
+
+  .reward-desc .funny {
+    font-family: 'Patrick Hand', cursive;
+    color: var(--water-dark);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  /* Tier donate button */
+  .tier-donate-btn {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: var(--white);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .tier-donate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    filter: brightness(1.08);
+  }
+
+  .tier-donate-btn.btn-splash { background: linear-gradient(135deg, #4FC3F7, #039BE5); }
+  .tier-donate-btn.btn-cannonball { background: linear-gradient(135deg, #FFD54F, #FFB300); color: var(--dark); }
+  .tier-donate-btn.btn-belly { background: linear-gradient(135deg, #FF8A80, #E53935); }
+  .tier-donate-btn.btn-shark { background: linear-gradient(135deg, #B388FF, #7C4DFF); }
+  .tier-donate-btn.btn-whale { background: linear-gradient(135deg, #FF6B9D, #D81B60); }
+
+  .tier-donate-btn .sq-icon {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-left: 6px;
+  }
+
+  /* ===== CUSTOM AMOUNT SECTION ===== */
+  .custom-amount-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+    text-align: center;
+    border: 2px dashed var(--mint);
+  }
+
+  .custom-amount-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .custom-amount-card p {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  .quick-amounts {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .quick-amt-btn {
+    padding: 10px 22px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: var(--dark);
+    background: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .quick-amt-btn:hover {
+    border-color: var(--sky-blue);
+    background: var(--water-light);
+    transform: translateY(-2px);
+  }
+
+  .quick-amt-btn.selected {
+    border-color: var(--sky-blue);
+    background: var(--water-light);
+    color: var(--water-dark);
+  }
+
+  .custom-send-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    background: linear-gradient(135deg, var(--mint), #26A69A);
+    color: var(--white);
+    border: none;
+    border-radius: 14px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 8px;
+    box-shadow: 0 4px 16px rgba(129,230,217,0.4);
+    transition: transform 0.2s;
+    text-decoration: none;
+  }
+
+  .custom-send-btn:hover { transform: translateY(-2px); }
+
+  .square-powered {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #B0BEC5;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .square-logo-inline {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: #2D3748;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+
+  /* ===== BREAKDOWN ===== */
+  .breakdown-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+  }
+
+  .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #E2E8F0;
+    font-size: 15px;
+  }
+
+  .breakdown-item:last-child { border: none; }
+
+  .breakdown-item .item-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+
+  .breakdown-item .item-cost {
+    font-family: 'Fredoka One', cursive;
+    color: var(--water-dark);
+  }
+
+  .breakdown-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0 0;
+    margin-top: 4px;
+    border-top: 3px solid var(--sky-blue);
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    color: var(--dark);
+  }
+
+  /* ===== SHARE SECTION ===== */
+  .share-section {
+    text-align: center;
+    background: linear-gradient(135deg, #E8F5E9, #E1F5FE);
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+  }
+
+  .share-section h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .share-btns {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .share-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s;
+  }
+
+  .share-btn:hover { transform: scale(1.05); }
+
+  .share-btn.fb { background: #1877F2; }
+  .share-btn.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .share-btn.wa { background: #25D366; }
+  .share-btn.em { background: #718096; }
+  .share-btn.txt { background: var(--sky-blue); }
+
+  /* ===== ORGANIZER ===== */
+  .organizer-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 22px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .org-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky-blue), var(--water-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .org-info .org-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: var(--dark);
+  }
+
+  .org-info .org-role {
+    font-size: 13px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  .verified-badge {
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 8px;
+    margin-left: auto;
+  }
+
+  /* ===== RECENT DONORS ===== */
+  .donors-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+  }
+
+  .donor-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .donor-row:last-child { border: none; }
+
+  .donor-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .donor-info { flex: 1; }
+  .donor-name { font-weight: 700; font-size: 14px; }
+  .donor-msg { font-size: 13px; color: #999; font-style: italic; }
+  .donor-amount { font-family: 'Fredoka One', cursive; font-size: 15px; color: var(--mint); }
+  .donor-tier { font-size: 11px; color: var(--purple-fizz); font-weight: 700; }
+
+  /* ===== SETUP GUIDE ===== */
+  .setup-guide {
+    background: linear-gradient(135deg, #FFF3E0, #FFF8E1);
+    border: 2px dashed #FFB74D;
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+  }
+
+  .setup-guide h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: #E65100;
+    margin-bottom: 12px;
+  }
+
+  .setup-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #5D4037;
+  }
+
+  .setup-step:last-child { margin-bottom: 0; }
+
+  .step-num {
+    background: #FF9800;
+    color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .setup-step code {
+    background: rgba(255,255,255,0.7);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #BF360C;
+    word-break: break-all;
+  }
+
+  /* ===== FINE PRINT ===== */
+  .fine-print {
+    text-align: center;
+    font-size: 12px;
+    color: #A0AEC0;
+    padding: 20px;
+    font-style: italic;
+  }
+
+  .fine-print .fun-note {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    color: var(--pink-pop);
+    margin-bottom: 6px;
+  }
+
+  /* ===== MOCK BANNER ===== */
+  .mock-banner {
+    background: repeating-linear-gradient(
+      45deg,
+      #FFD54F,
+      #FFD54F 10px,
+      #FFC107 10px,
+      #FFC107 20px
+    );
+    text-align: center;
+    padding: 10px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 14px;
+    color: var(--dark);
+    letter-spacing: 1px;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .anim-in { animation: fade-up 0.6s ease-out both; }
+  .anim-in:nth-child(2) { animation-delay: 0.1s; }
+  .anim-in:nth-child(3) { animation-delay: 0.2s; }
+  .anim-in:nth-child(4) { animation-delay: 0.3s; }
+  .anim-in:nth-child(5) { animation-delay: 0.4s; }
+
+  @media (max-width: 500px) {
+    .photo-grid { grid-template-columns: 1fr; }
+    .reward-top { flex-direction: column; align-items: center; text-align: center; }
+    .reward-header { flex-direction: column; gap: 4px; }
+    .quick-amounts { gap: 6px; }
+    .quick-amt-btn { padding: 8px 16px; font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOCK DESIGN BANNER -->
+<div class="mock-banner">⚠️ MOCKUP DESIGN — NOT A LIVE PAGE — FOR TATA'S REVIEW ⚠️</div>
+
+<!-- HEADER -->
+<div class="header-zone">
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+
+  <div class="pool-emoji-row">🏊‍♀️💦🌊🩱🦩</div>
+  <div class="mock-badge">Gabby's 7th Birthday Fund</div>
+  <h1 class="header-title">Help Gabby<br>Get Her Pool! 💖</h1>
+  <p class="header-sub">One Gift. One Pool. One Very Happy 7-Year-Old.</p>
+  <p class="header-location">📍 Tucson, Arizona &nbsp;·&nbsp; ☀️ Because it's literally 110° here</p>
+
+  <svg class="wave-divider" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V100H0Z" fill="#FFF8F0"/>
+  </svg>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+  <!-- PHOTO PLACEHOLDERS -->
+  <div class="photo-grid anim-in">
+    <div class="photo-box main">
+      <div class="placeholder-text">
+        <span class="placeholder-emoji">📸</span>
+        Add Gabby's cutest pool-ready photo here!<br><small>(Sunglasses + floatie = chef's kiss)</small>
+      </div>
+    </div>
+    <div class="side-stack">
+      <div class="photo-box side">
+        <div class="placeholder-text">
+          <span class="placeholder-emoji">🦩</span>
+          The dream pool!
+        </div>
+      </div>
+      <div class="photo-box side">
+        <div class="placeholder-text">
+          <span class="placeholder-emoji">🌵</span>
+          Tucson backyard
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISITOR COUNTER -->
+  <div class="visitor-counter anim-in">
+    <div style="text-align:center;">
+      <div class="vc-icon">👀</div>
+    </div>
+    <div style="text-align:left;">
+      <div class="vc-text">People checking out Gabby's page:</div>
+      <div class="vc-number">
+        <span class="vc-digit">1</span><span class="vc-digit">4</span><span class="vc-digit">7</span>
+      </div>
+      <div class="vc-subtext">visitors from 3 states &nbsp;🌎</div>
+      <div class="vc-globe-row">
+        <span class="vc-flag">🏜️ AZ</span>
+        <span class="vc-flag">·</span>
+        <span class="vc-flag">🌴 CA</span>
+        <span class="vc-flag">·</span>
+        <span class="vc-flag">⛰️ CO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS CARD -->
+  <div class="progress-card anim-in">
+    <div class="progress-amounts">
+      <span class="raised-amount">$345</span>
+      <span class="goal-amount">of $1,500 goal</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill"></div>
+    </div>
+    <div class="progress-stats">
+      <span>👨‍👩‍👧 12 donors</span>
+      <span>💝 23% funded</span>
+    </div>
+    <div class="deadline-badge">
+      ⏰ &nbsp;Deadline: Gabby's Birthday — <strong>&nbsp;[Insert Date]!</strong>
+    </div>
+  </div>
+
+  <!-- BIG DONATE BUTTON -->
+  <a href="YOUR_SQUARE_LINK_HERE" class="big-donate-btn anim-in" target="_blank" rel="noopener">
+    💦 Make a Splash — Donate Now! 💦
+  </a>
+
+  <!-- STORY SECTION -->
+  <div class="story-section anim-in">
+    <h2 class="section-label">📖 The Story</h2>
+    <div class="story-text">
+      <p>Hey familia! 👋</p>
+      <p>It's Tata here. My granddaughter <span class="highlight">Gabby is turning 7</span>, and this kid has ONE dream for her birthday: <strong>her very own above-ground swimming pool</strong> right next to the house here in Tucson.</p>
+      <p>Now, you all know what Tucson summers are like. By June the lizards are wearing tiny flip-flops. 🦎 Gabby told me — and I quote — <em>"Tata, I don't want a bunch of toys. I want a pool so I can be a mermaid every single day."</em></p>
+      <p>How am I supposed to say no to that? I'm her Tata. It's literally my job to make her dreams come true.</p>
+
+      <div class="callout">
+        🎯 <strong>The Big Idea:</strong> Instead of everybody buying separate gifts she'll play with for 20 minutes and forget about, we're ALL chipping in for ONE legendary gift — an above-ground pool she'll use all summer long. One gift. One pool. One extremely happy Gabby. 🏊‍♀️
+      </div>
+
+      <p>I've got the costs broken down below so you can see exactly where every dollar goes. No mysteries here — just a Tata trying to make his granddaughter's birthday the best one yet.</p>
+
+      <p>And yes — <span class="highlight">there are rewards</span>. Gabby insisted on "giving back to her investors." She learned that word from Shark Tank and now she won't stop saying it. We may have created a monster. 🦈</p>
+
+      <p>Every dollar — big or small — gets us closer to splashdown. Let's make this happen, family!</p>
+
+      <div class="tata-sig">With love,<br>— Tata 🫶</div>
+    </div>
+  </div>
+
+  <!-- REWARD TIERS WITH SQUARE BUTTONS -->
+  <div class="rewards-section anim-in">
+    <h2 class="section-label">🏆 Choose Your Splash Level <span style="font-family:'Patrick Hand',cursive;font-size:16px;color:#999;">(click to donate via Square)</span></h2>
+    <div class="rewards-grid">
+
+      <div class="reward-card tier-splash">
+        <div class="reward-top">
+          <div class="reward-emoji">💧</div>
+          <div class="reward-info">
+            <div class="reward-header">
+              <span class="reward-name">The Splash</span>
+              <span class="reward-price">$10</span>
+            </div>
+            <div class="reward-desc">
+              <strong>Gift Certificate for 1 FREE Swimming Lesson from Gabby.</strong><br>
+              <span class="funny">"She cannot actually swim yet, but she's very confident about it." — Tata</span>
+            </div>
+          </div>
+        </div>
+        <a href="YOUR_SQUARE_LINK_10" class="tier-donate-btn btn-splash" target="_blank" rel="noopener">
+          Donate $10 — Make a Splash 💧 <span class="sq-icon">⬛</span>
+        </a>
+      </div>
+
+      <div class="reward-card tier-cannonball">
+        <div class="reward-top">
+          <div class="reward-emoji">💣</div>
+          <div class="reward-info">
+            <div class="reward-header">
+              <span class="reward-name">The Cannonball</span>
+              <span class="reward-price">$25</span>
+            </div>
+            <div class="reward-desc">
+              <strong>A hand-drawn "Thank You" masterpiece by Gabby</strong> (crayon, marker, and minimum two glitter stickers guaranteed).<br>
+              <span class="funny">Frame-worthy? That's between you and God. Made with love? 100%.</span>
+            </div>
+          </div>
+        </div>
+        <a href="YOUR_SQUARE_LINK_25" class="tier-donate-btn btn-cannonball" target="_blank" rel="noopener">
+          Donate $25 — CANNONBALL! 💣 <span class="sq-icon">⬛</span>
+        </a>
+      </div>
+
+      <div class="reward-card tier-belly">
+        <div class="reward-top">
+          <div class="reward-emoji">🤿</div>
+          <div class="reward-info">
+            <div class="reward-header">
+              <span class="reward-name">The Belly Flop</span>
+              <span class="reward-price">$50</span>
+            </div>
+            <div class="reward-desc">
+              <strong>VIP Pool Party Invite + Your Name on the "Wall of Legends"</strong> (a poster board Tata will tape to the fence).<br>
+              <span class="funny">Entry requirement: one (1) mandatory belly flop. No exceptions. Tata included.</span>
+            </div>
+          </div>
+        </div>
+        <a href="YOUR_SQUARE_LINK_50" class="tier-donate-btn btn-belly" target="_blank" rel="noopener">
+          Donate $50 — Belly Flop Time 🤿 <span class="sq-icon">⬛</span>
+        </a>
+      </div>
+
+      <div class="reward-card tier-shark">
+        <div class="reward-top">
+          <div class="reward-emoji">🦈</div>
+          <div class="reward-info">
+            <div class="reward-header">
+              <span class="reward-name">The Shark</span>
+              <span class="reward-price">$100</span>
+            </div>
+            <div class="reward-desc">
+              <strong>ALL of the above + Gabby will record you a personal "Thank You" video</strong> naming you her "Official Pool Sponsor."<br>
+              <span class="funny">Warning: she may try to interview you for her imaginary YouTube channel. Just go with it.</span>
+            </div>
+          </div>
+        </div>
+        <a href="YOUR_SQUARE_LINK_100" class="tier-donate-btn btn-shark" target="_blank" rel="noopener">
+          Donate $100 — Go Full Shark 🦈 <span class="sq-icon">⬛</span>
+        </a>
+      </div>
+
+      <div class="reward-card tier-whale">
+        <div class="reward-top">
+          <div class="reward-emoji">🐳</div>
+          <div class="reward-info">
+            <div class="reward-header">
+              <span class="reward-name">The Whale</span>
+              <span class="reward-price">$200+</span>
+            </div>
+            <div class="reward-desc">
+              <strong>LEGENDARY STATUS: A pool float permanently named in your honor.</strong> You pick the animal — flamingo, unicorn, pizza slice — and it will forever be called "Tía Maria's Float" or "Uncle Ray's Raft."<br>
+              <span class="funny">You are basically royalty in Gabby's eyes. Expect a crown, a ceremony, and possibly a theme song. 👑</span>
+            </div>
+          </div>
+        </div>
+        <a href="YOUR_SQUARE_LINK_200" class="tier-donate-btn btn-whale" target="_blank" rel="noopener">
+          Donate $200+ — Whale Status 🐳 <span class="sq-icon">⬛</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CUSTOM AMOUNT -->
+  <div class="custom-amount-card anim-in">
+    <h3>🎁 Or Pick Your Own Amount</h3>
+    <p>Every dollar counts — even $5 gets us closer to cannonball season!</p>
+    <div class="quick-amounts">
+      <a href="YOUR_SQUARE_LINK_5" class="quick-amt-btn" target="_blank" rel="noopener">$5</a>
+      <a href="YOUR_SQUARE_LINK_15" class="quick-amt-btn" target="_blank" rel="noopener">$15</a>
+      <a href="YOUR_SQUARE_LINK_35" class="quick-amt-btn" target="_blank" rel="noopener">$35</a>
+      <a href="YOUR_SQUARE_LINK_75" class="quick-amt-btn" target="_blank" rel="noopener">$75</a>
+      <a href="YOUR_SQUARE_LINK_150" class="quick-amt-btn" target="_blank" rel="noopener">$150</a>
+    </div>
+    <a href="YOUR_SQUARE_LINK_CUSTOM" class="custom-send-btn" target="_blank" rel="noopener">
+      💚 Choose Your Own Amount 💚
+    </a>
+    <div class="square-powered">
+      <span class="square-logo-inline"></span> Secure payment powered by Square
+    </div>
+  </div>
+
+  <!-- COST BREAKDOWN -->
+  <div class="breakdown-section anim-in">
+    <h2 class="section-label">💰 Where Every Dollar Goes</h2>
+    <div class="breakdown-item">
+      <span class="item-label">🏊 Above-Ground Pool (15ft round)</span>
+      <span class="item-cost">$800</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">🔧 Pump, Filter & Ladder</span>
+      <span class="item-cost">$250</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">🧪 Pool Chemicals & Test Kit</span>
+      <span class="item-cost">$75</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">🛡️ Ground Prep & Pool Pad</span>
+      <span class="item-cost">$100</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">🩱 Floats, Toys & Pool Accessories</span>
+      <span class="item-cost">$80</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">☀️ Shade Canopy (it's Tucson, c'mon)</span>
+      <span class="item-cost">$90</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">🎈 Birthday Pool Party Supplies</span>
+      <span class="item-cost">$60</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="item-label">📦 Square Transaction Fees (~2.9%)</span>
+      <span class="item-cost">~$45</span>
+    </div>
+    <div class="breakdown-total">
+      <span>Total Goal</span>
+      <span>$1,500</span>
+    </div>
+  </div>
+
+  <!-- RECENT DONORS (SAMPLE) -->
+  <div class="donors-section anim-in">
+    <h2 class="section-label">💝 Recent Splashers</h2>
+    <div class="donor-row">
+      <div class="donor-avatar" style="background:#E3F2FD;">👴</div>
+      <div class="donor-info">
+        <div class="donor-name">Tata</div>
+        <div class="donor-msg">"First one in! Let's get this pool, mija! 🫶"</div>
+        <div class="donor-tier">🦈 THE SHARK</div>
+      </div>
+      <div class="donor-amount">$100</div>
+    </div>
+    <div class="donor-row">
+      <div class="donor-avatar" style="background:#FFF3E0;">👨</div>
+      <div class="donor-info">
+        <div class="donor-name">Uncle Ray</div>
+        <div class="donor-msg">"I want my belly flop rights. Clearing my schedule. 😂"</div>
+        <div class="donor-tier">🤿 THE BELLY FLOP</div>
+      </div>
+      <div class="donor-amount">$50</div>
+    </div>
+    <div class="donor-row">
+      <div class="donor-avatar" style="background:#F3E5F5;">👩</div>
+      <div class="donor-info">
+        <div class="donor-name">Tía Sofia</div>
+        <div class="donor-msg">"Can't wait for my free swimming lesson 😂💦"</div>
+        <div class="donor-tier">💣 THE CANNONBALL</div>
+      </div>
+      <div class="donor-amount">$25</div>
+    </div>
+    <div class="donor-row">
+      <div class="donor-avatar" style="background:#E8F5E9;">👦</div>
+      <div class="donor-info">
+        <div class="donor-name">Cousin Marco</div>
+        <div class="donor-msg">"This counts as birthday AND Christmas. 😤"</div>
+        <div class="donor-tier">💧 THE SPLASH</div>
+      </div>
+      <div class="donor-amount">$10</div>
+    </div>
+    <div class="donor-row">
+      <div class="donor-avatar" style="background:#FFF8E1;">👵</div>
+      <div class="donor-info">
+        <div class="donor-name">Nana</div>
+        <div class="donor-msg">"Anything for my baby. Tata you better supervise! 😘"</div>
+        <div class="donor-tier">🦈 THE SHARK</div>
+      </div>
+      <div class="donor-amount">$100</div>
+    </div>
+  </div>
+
+  <!-- SHARE SECTION -->
+  <div class="share-section anim-in">
+    <h3>📣 Help Gabby's Pool Dream Go Viral!</h3>
+    <p style="font-size:14px;color:#718096;margin-bottom:14px;">Every share = closer to cannonball season 🌊</p>
+    <div class="share-btns">
+      <button class="share-btn fb">Facebook</button>
+      <button class="share-btn ig">Instagram</button>
+      <button class="share-btn wa">WhatsApp</button>
+      <button class="share-btn txt">Text</button>
+      <button class="share-btn em">Email</button>
+    </div>
+  </div>
+
+  <!-- ORGANIZER -->
+  <div class="organizer-card anim-in">
+    <div class="org-avatar">👴</div>
+    <div class="org-info">
+      <div class="org-name">Organized by Tata</div>
+      <div class="org-role">Beneficiary: Gabby 🎀 · Tucson, AZ · Proud Grandpa</div>
+    </div>
+    <span class="verified-badge">✓ Family</span>
+  </div>
+
+  <!-- BOTTOM DONATE -->
+  <a href="YOUR_SQUARE_LINK_CUSTOM" class="big-donate-btn" target="_blank" rel="noopener">
+    🎉 Donate to Gabby's Pool Fund 🎉
+  </a>
+
+  <!-- SETUP GUIDE FOR TATA -->
+  <div class="setup-guide">
+    <h3>🔧 Tata's Setup Checklist (delete this section before sharing!)</h3>
+    <div class="setup-step">
+      <span class="step-num">1</span>
+      <div>Log into <strong>Square Dashboard</strong> → Payments → Payment Links → Create a link for each amount: $5, $10, $15, $25, $35, $50, $75, $100, $150, $200</div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">2</span>
+      <div>Each link looks like: <code>https://square.link/u/AbCdEfGh</code> — copy each one</div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">3</span>
+      <div>In this HTML file, find and replace each <code>YOUR_SQUARE_LINK_10</code>, <code>YOUR_SQUARE_LINK_25</code>, etc. with your real Square links</div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">4</span>
+      <div>For <code>YOUR_SQUARE_LINK_CUSTOM</code>, create a Square link that lets the buyer enter their own amount (choose "Customer decides price")</div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">5</span>
+      <div>Replace the photo placeholders with real photos of Gabby</div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">6</span>
+      <div>Add Gabby's birthday date where it says <code>[Insert Date]</code></div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">7</span>
+      <div>Host this page for free on <strong>Netlify</strong> or <strong>GitHub Pages</strong>, or share as a direct HTML file. Use <strong>Bitly</strong> links when sharing to track visitor reach!</div>
+    </div>
+    <div class="setup-step">
+      <span class="step-num">8</span>
+      <div><strong>Delete this yellow checklist section</strong> before sharing with family! 😄</div>
+    </div>
+  </div>
+
+  <!-- FINE PRINT -->
+  <div class="fine-print">
+    <div class="fun-note">🦩 No flamingos were harmed in the making of this fundraiser 🦩</div>
+    <p>All funds go directly to Tata's checking account via Square.<br>
+    Pool supervised by responsible adults (mostly Tata).<br>
+    Gabby's swimming lesson reward is non-accredited. Swim at your own risk. 😂<br>
+    Square fee: 2.9% + $0.30 per transaction · Secure payments</p>
+  </div>
+
+</div>
+
+</body>
+</html>
