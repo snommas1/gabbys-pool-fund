@@ -920,6 +920,28 @@
   .fee-free   { background: #C6F6D5; color: #276749; }
   .fee-small  { background: #FEF3C7; color: #92400E; }
 
+  /* ===== POST-DONATE NUDGE ===== */
+  .post-donate-nudge {
+    background: linear-gradient(135deg, #E8F5E9, #E1F5FE);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: -18px;
+    margin-bottom: 28px;
+    text-align: center;
+    border: 2px dashed #81C784;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 17px;
+    color: #2E7D32;
+    line-height: 1.6;
+  }
+
+  .post-donate-nudge a {
+    color: var(--pink-pop);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px dashed var(--pink-pop);
+  }
+
   /* ===== BIRTHDAY WALL ===== */
   .birthday-wall-section {
     background: linear-gradient(135deg, #FFF0F8, #F0F8FF);
@@ -1278,6 +1300,10 @@
     💦 Make a Splash — Donate Now! 💦
   </a>
 
+  <div class="post-donate-nudge">
+    ✅ Just donated? Come back here and <a href="#birthday-wall">leave Gabby a birthday message</a> on the wall below — the whole family will see it! 🎂
+  </div>
+
   <!-- STORY SECTION -->
   <div class="story-section anim-in">
     <h2 class="section-label">🌟 Gabby's Story</h2>
@@ -1610,10 +1636,17 @@
     🎉 Donate to Gabby's Pool Fund 🎉
   </a>
 
+  <div class="post-donate-nudge">
+    ✅ Just donated? Scroll down and <a href="#birthday-wall">leave Gabby a birthday message</a> on the wall — the whole family will see it! 🎂
+  </div>
+
   <!-- BIRTHDAY WALL -->
-  <div class="birthday-wall-section anim-in">
+  <div class="birthday-wall-section anim-in" id="birthday-wall">
     <h2 class="section-label">🎂 Birthday Wall — Leave Gabby a Note!</h2>
-    <p class="wall-intro">Already donated? Leave Gabby a birthday message! Every note shows up on the wall below for the whole family to see. 💌</p>
+    <p class="wall-intro">
+      <strong>Step 1:</strong> Donate using any button above — Square will ask you for a birthday message during checkout (it goes to Tata privately). 🔒<br>
+      <strong>Step 2:</strong> Come back here and post your message below so the <em>whole family</em> can see it on the wall! 🌟
+    </p>
 
     <!-- SUBMIT FORM -->
     <div class="wall-form">
@@ -1646,17 +1679,15 @@
 
     <!-- AIRTABLE SETUP INSTRUCTIONS (delete before sharing) -->
     <div class="airtable-setup-note" id="airtable-setup-note">
-      <strong>🔧 Setup: Connect Airtable (delete this box before sharing!)</strong><br><br>
-      1. Go to <strong>airtable.com</strong> → Sign up free → Create a base called <strong>"Gabby's Pool Wall"</strong><br>
-      2. Create a table called <strong>Messages</strong> with these fields:<br>
-      &nbsp;&nbsp;• <code>Name</code> (Single line text)<br>
-      &nbsp;&nbsp;• <code>From</code> (Single line text)<br>
-      &nbsp;&nbsp;• <code>Message</code> (Long text)<br>
-      &nbsp;&nbsp;• <code>Tier</code> (Single line text)<br>
-      3. Go to <strong>airtable.com/create/tokens</strong> → Create a token with <code>data.records:read</code> and <code>data.records:write</code> scopes for your base<br>
-      4. Find your <strong>Base ID</strong>: it's in the URL when you open your base → <code>airtable.com/BASE_ID_HERE/...</code><br>
-      5. Replace <code>YOUR_AIRTABLE_TOKEN</code> and <code>YOUR_BASE_ID</code> in the &lt;script&gt; at the bottom of this file<br>
-      6. Delete this yellow box!
+      <strong>🔧 Setup: Connect Supabase (delete this box before sharing!)</strong><br><br>
+      1. Go to <strong>supabase.com</strong> → Sign up free → Create a new project<br>
+      2. Once your project loads, go to <strong>SQL Editor</strong> and run this to create the table:<br>
+      <code>create table messages (id bigint generated always as identity primary key, created_at timestamptz default now(), name text, from_location text, message text, tier text);</code><br><br>
+      3. Then enable public inserts and reads — run this too:<br>
+      <code>alter table messages enable row level security; create policy "Anyone can read" on messages for select using (true); create policy "Anyone can insert" on messages for insert with check (true);</code><br><br>
+      4. Go to <strong>Project Settings → API</strong> → copy your <strong>Project URL</strong> and <strong>anon public key</strong><br>
+      5. In this file, replace <code>YOUR_SUPABASE_URL</code> and <code>YOUR_SUPABASE_ANON_KEY</code> in the &lt;script&gt; at the bottom<br>
+      6. Delete this yellow box and you're live! 🎉
     </div>
   </div>
 
@@ -1707,16 +1738,17 @@
 
 <script>
   // =============================================
-  // AIRTABLE CONFIG — replace these two values!
+  // SUPABASE CONFIG — replace these two values!
   // =============================================
-  const AIRTABLE_TOKEN = 'YOUR_AIRTABLE_TOKEN';
-  const BASE_ID        = 'YOUR_BASE_ID';
-  const TABLE_NAME     = 'Messages';
-  const API_URL        = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
+  const SUPABASE_URL    = 'https://hgynvqhososbxgkmdspm.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_4DFSbmDLuSVJ5ITbeeulaQ_KRb57yJo';
 
+  const API_URL = `${SUPABASE_URL}/rest/v1/messages`;
   const headers = {
-    'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
-    'Content-Type': 'application/json'
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
   };
 
   // Load messages on page load
@@ -1724,50 +1756,44 @@
     const list = document.getElementById('wall-messages-list');
     const countEl = document.getElementById('message-count');
 
-    // If not configured yet, show sample messages
-    if (AIRTABLE_TOKEN === 'YOUR_AIRTABLE_TOKEN') {
+    // Not configured yet — show sample preview
+    if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
       list.innerHTML = `
         <div class="wall-message-card">
           <div class="wm-top"><span class="wm-name">👴 Tata</span><span class="wm-tier">🦈 The Shark — $100</span></div>
           <div class="wm-message">"Happy birthday mija! This pool is all yours. Tata loves you to the moon! 🫶"</div>
-          <div class="wm-date">Sample message — connect Airtable to go live!</div>
+          <div class="wm-date">Sample message — connect Supabase to go live!</div>
         </div>
         <div class="wall-message-card">
           <div class="wm-top"><span class="wm-name">👵 Nana</span><span class="wm-tier">🦈 The Shark — $100</span></div>
           <div class="wm-message">"My sweet Gabby girl! Enjoy every single splash. We love you so much! 💖"</div>
-          <div class="wm-date">Sample message — connect Airtable to go live!</div>
-        </div>
-      `;
+          <div class="wm-date">Sample message — connect Supabase to go live!</div>
+        </div>`;
       countEl.textContent = '(sample preview)';
       return;
     }
 
     try {
-      const res = await fetch(`${API_URL}?sort[0][field]=Created&sort[0][direction]=desc`, { headers });
+      const res = await fetch(`${API_URL}?order=created_at.desc`, { headers });
       const data = await res.json();
 
-      if (!data.records || data.records.length === 0) {
+      if (!Array.isArray(data) || data.length === 0) {
         list.innerHTML = `<div class="wall-empty">No messages yet — be the first to leave one! 🎉</div>`;
         countEl.textContent = '';
         return;
       }
 
-      countEl.textContent = `(${data.records.length} message${data.records.length !== 1 ? 's' : ''})`;
-
-      list.innerHTML = data.records.map(r => {
-        const f = r.fields;
-        const name = f.Name || 'Anonymous';
-        const from = f.From ? ` · ${f.From}` : '';
-        const msg  = f.Message || '';
-        const tier = f.Tier || '';
-        const date = r.createdTime ? new Date(r.createdTime).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+      countEl.textContent = `(${data.length} message${data.length !== 1 ? 's' : ''})`;
+      list.innerHTML = data.map(r => {
+        const from = r.from_location ? ` · ${escHtml(r.from_location)}` : '';
+        const date = r.created_at ? new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
         return `
           <div class="wall-message-card">
             <div class="wm-top">
-              <span class="wm-name">💌 ${escHtml(name)}${escHtml(from)}</span>
-              ${tier ? `<span class="wm-tier">${escHtml(tier)}</span>` : ''}
+              <span class="wm-name">💌 ${escHtml(r.name)}${from}</span>
+              ${r.tier ? `<span class="wm-tier">${escHtml(r.tier)}</span>` : ''}
             </div>
-            <div class="wm-message">"${escHtml(msg)}"</div>
+            <div class="wm-message">"${escHtml(r.message)}"</div>
             ${date ? `<div class="wm-date">${date}</div>` : ''}
           </div>`;
       }).join('');
@@ -1782,13 +1808,12 @@
     const message = document.getElementById('wall-message').value.trim();
     const tier    = document.getElementById('wall-tier').value;
     const btn     = document.getElementById('wall-submit-btn');
-    const status  = document.getElementById('submit-status');
 
-    if (!name) { showStatus('Please enter your name! 😊', 'error'); return; }
+    if (!name)    { showStatus('Please enter your name! 😊', 'error'); return; }
     if (!message) { showStatus('Please write a message for Gabby! 🎀', 'error'); return; }
 
-    if (AIRTABLE_TOKEN === 'YOUR_AIRTABLE_TOKEN') {
-      showStatus('⚙️ Airtable not connected yet — see the setup instructions below!', 'error');
+    if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+      showStatus('⚙️ Supabase not connected yet — see setup instructions below!', 'error');
       return;
     }
 
@@ -1799,12 +1824,11 @@
       const res = await fetch(API_URL, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ fields: { Name: name, From: from, Message: message, Tier: tier } })
+        body: JSON.stringify({ name, from_location: from, message, tier })
       });
 
       if (!res.ok) throw new Error();
 
-      // Clear form
       document.getElementById('wall-name').value = '';
       document.getElementById('wall-from').value = '';
       document.getElementById('wall-message').value = '';
@@ -1827,12 +1851,10 @@
   }
 
   function escHtml(str) {
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // Load on page open
   loadMessages();
-  // Auto-refresh every 60 seconds
   setInterval(loadMessages, 60000);
 </script>
 </body>
