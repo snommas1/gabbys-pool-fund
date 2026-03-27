@@ -1337,6 +1337,81 @@
     margin-bottom: 14px;
   }
 
+  /* ===== MODAL STEP 2 — PAYMENT PICKER ===== */
+  .modal-step { display: none; }
+  .modal-step.active { display: block; }
+
+  .pay-step-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .pay-step-sub {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  .pay-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pay-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: 'Fredoka One', cursive;
+    font-size: 17px;
+    color: white;
+    text-align: left;
+    transition: transform 0.15s, filter 0.15s;
+  }
+
+  .pay-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+  .pay-btn-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .pay-btn.pay-square  { background: linear-gradient(135deg, #2D3748, #1A202C); }
+  .pay-btn.pay-zelle   { background: linear-gradient(135deg, #6B2D8B, #4A1A6B); }
+  .pay-btn.pay-cashapp { background: linear-gradient(135deg, #00C244, #00952F); }
+  .pay-btn.pay-venmo   { background: linear-gradient(135deg, #3D95CE, #2175A8); }
+  .pay-btn.pay-paypal  { background: linear-gradient(135deg, #003087, #001F5E); }
+  .pay-btn.pay-cash    { background: linear-gradient(135deg, #C6A630, #9A7E20); }
+
+  .pay-fee { font-family: 'Quicksand', sans-serif; font-size: 12px; opacity: 0.75; margin-left: auto; white-space: nowrap; }
+
+  .pay-handle-card {
+    display: none;
+    background: #F7FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #4A5568;
+    line-height: 1.7;
+  }
+
+  .pay-handle-card.visible { display: block; }
+  .pay-handle-card strong { font-family: 'Fredoka One', cursive; font-size: 16px; color: var(--dark); }
+
 </style>
 </head>
 <body>
@@ -1666,66 +1741,6 @@
     <span class="verified-badge">✓ Family</span>
   </div>
 
-  <!-- PAYMENT METHODS -->
-  <div class="payment-methods-section anim-in">
-    <h2 class="section-label">💳 Ways to Send Money</h2>
-    <p class="pm-intro">No credit card? No problem! Pick whatever's easiest for you — Zelle, Cash App, and Venmo are all 100% free and most people already have them. Just send your amount and add <strong>"Gabby's Pool 🏊"</strong> in the note so we can track it!</p>
-
-    <div class="pm-grid">
-
-      <div class="pm-card pm-zelle">
-        <div class="pm-logo logo-zelle">Z</div>
-        <div class="pm-info">
-          <div class="pm-name">Zelle</div>
-          <div class="pm-handle">📧 [YOUR EMAIL OR PHONE]</div>
-          <div class="pm-note">Sends directly bank-to-bank · Usually instant · Built into most banking apps</div>
-        </div>
-        <span class="pm-fee-badge fee-free">✓ Free</span>
-      </div>
-
-      <div class="pm-card pm-cashapp">
-        <div class="pm-logo logo-cashapp">$</div>
-        <div class="pm-info">
-          <div class="pm-name">Cash App</div>
-          <div class="pm-handle">$[YOUR CASHTAG]</div>
-          <div class="pm-note">Search your $Cashtag in the app and send any amount</div>
-        </div>
-        <span class="pm-fee-badge fee-free">✓ Free</span>
-      </div>
-
-      <div class="pm-card pm-venmo">
-        <div class="pm-logo logo-venmo">V</div>
-        <div class="pm-info">
-          <div class="pm-name">Venmo</div>
-          <div class="pm-handle">@[YOUR VENMO USERNAME]</div>
-          <div class="pm-note">Search your username in Venmo · Set memo to "Gabby's Pool 🏊"</div>
-        </div>
-        <span class="pm-fee-badge fee-free">✓ Free</span>
-      </div>
-
-      <div class="pm-card pm-paypal">
-        <div class="pm-logo logo-paypal">PP</div>
-        <div class="pm-info">
-          <div class="pm-name">PayPal</div>
-          <div class="pm-handle">📧 [YOUR PAYPAL EMAIL]</div>
-          <div class="pm-note">Use "Send to a Friend" (not Goods &amp; Services) to avoid fees</div>
-        </div>
-        <span class="pm-fee-badge fee-free">✓ Free*</span>
-      </div>
-
-      <div class="pm-card pm-cash">
-        <div class="pm-logo logo-cash">💵</div>
-        <div class="pm-info">
-          <div class="pm-name">Cash in Person</div>
-          <div class="pm-handle">Hand it to Tata or any family member at the party 🎉</div>
-          <div class="pm-note">Old school still works! 100% of it goes straight to the pool.</div>
-        </div>
-        <span class="pm-fee-badge fee-free">✓ Free</span>
-      </div>
-
-    </div>
-  </div>
-
   <!-- BOTTOM DONATE -->
 
   <a href="https://square.link/u/l9uHyVIh" class="big-donate-btn" target="_blank" rel="noopener">
@@ -1799,17 +1814,92 @@
   <div class="modal-overlay" id="donate-modal" onclick="handleOverlayClick(event)">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">&#x2715;</button>
-      <div class="modal-title">🎉 Leave Gabby a Note!</div>
-      <div class="modal-subtitle">Your message posts to the Birthday Wall, then we'll take you to Square to donate.</div>
       <div class="modal-tier-badge" id="modal-tier-badge"></div>
-      <p class="modal-required-note">* Name and birthday message are required</p>
-      <input type="text" id="modal-name" class="modal-input" placeholder="Your name * (e.g. Uncle Billy)" maxlength="50">
-      <input type="text" id="modal-from" class="modal-input" placeholder="Where are you from? (optional)" maxlength="50">
-      <textarea id="modal-message" class="modal-textarea" placeholder="Happy birthday Gabby! Can't wait to splash around at your party! 🎉" maxlength="300"></textarea>
-      <button class="modal-submit-btn" id="modal-submit-btn" onclick="modalSubmit()">
-        🎂 Post Message &amp; Go Donate!
-      </button>
-      <div class="modal-status" id="modal-status"></div>
+
+      <!-- STEP 1: Name / Location / Message -->
+      <div class="modal-step active" id="modal-step-1">
+        <div class="modal-title">🎉 Leave Gabby a Note!</div>
+        <div class="modal-subtitle">Your message posts to the Birthday Wall, then choose how to pay.</div>
+        <p class="modal-required-note">* Name and birthday message are required</p>
+        <input type="text" id="modal-name" class="modal-input" placeholder="Your name * (e.g. Uncle Billy)" maxlength="50">
+        <input type="text" id="modal-from" class="modal-input" placeholder="Where are you from? (optional)" maxlength="50">
+        <textarea id="modal-message" class="modal-textarea" placeholder="Happy birthday Gabby! Can't wait to splash around at your party! 🎉" maxlength="300"></textarea>
+        <button class="modal-submit-btn" id="modal-submit-btn" onclick="modalSubmit()">
+          Next — Choose How to Pay →
+        </button>
+        <div class="modal-status" id="modal-status"></div>
+      </div>
+
+      <!-- STEP 2: Payment picker -->
+      <div class="modal-step" id="modal-step-2">
+        <div class="pay-step-title">💳 How would you like to pay?</div>
+        <div class="pay-step-sub">Your birthday message is saved! Now pick your payment method.</div>
+        <div class="pay-grid">
+
+          <button class="pay-btn pay-square" onclick="payWith('square')">
+            <span class="pay-btn-icon">⬛</span>
+            Square (Credit / Debit Card)
+            <span class="pay-fee">2.9% fee</span>
+          </button>
+
+          <button class="pay-btn pay-zelle" onclick="payWith('zelle')">
+            <span class="pay-btn-icon">Z</span>
+            Zelle
+            <span class="pay-fee">Free</span>
+          </button>
+          <div class="pay-handle-card" id="handle-zelle">
+            <strong>Zelle</strong><br>
+            📧 [YOUR EMAIL OR PHONE]<br>
+            <small>Send from your banking app · Add note "Gabby's Pool 🏊"</small>
+          </div>
+
+          <button class="pay-btn pay-cashapp" onclick="payWith('cashapp')">
+            <span class="pay-btn-icon">$</span>
+            Cash App
+            <span class="pay-fee">Free</span>
+          </button>
+          <div class="pay-handle-card" id="handle-cashapp">
+            <strong>Cash App</strong><br>
+            $[YOUR CASHTAG]<br>
+            <small>Search this $Cashtag in Cash App · Add note "Gabby's Pool 🏊"</small>
+          </div>
+
+          <button class="pay-btn pay-venmo" onclick="payWith('venmo')">
+            <span class="pay-btn-icon">V</span>
+            Venmo
+            <span class="pay-fee">Free</span>
+          </button>
+          <div class="pay-handle-card" id="handle-venmo">
+            <strong>Venmo</strong><br>
+            @[YOUR VENMO USERNAME]<br>
+            <small>Search this username in Venmo · Add note "Gabby's Pool 🏊"</small>
+          </div>
+
+          <button class="pay-btn pay-paypal" onclick="payWith('paypal')">
+            <span class="pay-btn-icon">PP</span>
+            PayPal
+            <span class="pay-fee">Free*</span>
+          </button>
+          <div class="pay-handle-card" id="handle-paypal">
+            <strong>PayPal</strong><br>
+            📧 [YOUR PAYPAL EMAIL]<br>
+            <small>Use "Send to a Friend" to avoid fees · Add note "Gabby's Pool 🏊"</small>
+          </div>
+
+          <button class="pay-btn pay-cash" onclick="payWith('cash')">
+            <span class="pay-btn-icon">💵</span>
+            Cash in Person
+            <span class="pay-fee">Free</span>
+          </button>
+          <div class="pay-handle-card" id="handle-cash">
+            <strong>Cash in Person</strong><br>
+            Hand it to Tata or any family member at the party! 🎉<br>
+            <small>100% goes straight to the pool.</small>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1839,7 +1929,7 @@
 
   let currentTier = '';
 
-  // ── MODAL ──────────────────────────────────────
+  // ── MODAL OPEN / CLOSE ─────────────────────────
   function openModal(tier) {
     currentTier = tier;
     document.getElementById('modal-tier-badge').textContent = tier;
@@ -1849,7 +1939,12 @@
     document.getElementById('modal-status').textContent = '';
     document.getElementById('modal-status').className   = 'modal-status';
     document.getElementById('modal-submit-btn').disabled = false;
-    document.getElementById('modal-submit-btn').textContent = '🎂 Post Message & Go Donate!';
+    document.getElementById('modal-submit-btn').textContent = 'Next — Choose How to Pay →';
+    // Always start on step 1
+    document.getElementById('modal-step-1').classList.add('active');
+    document.getElementById('modal-step-2').classList.remove('active');
+    // Hide any open handle cards
+    document.querySelectorAll('.pay-handle-card').forEach(c => c.classList.remove('visible'));
     document.getElementById('donate-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('modal-name').focus(), 100);
@@ -1866,13 +1961,12 @@
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // ── SUBMIT from modal ──────────────────────────
+  // ── STEP 1 SUBMIT → save message → show step 2 ─
   async function modalSubmit() {
     const name    = document.getElementById('modal-name').value.trim();
     const from    = document.getElementById('modal-from').value.trim();
     const message = document.getElementById('modal-message').value.trim();
     const btn     = document.getElementById('modal-submit-btn');
-    const status  = document.getElementById('modal-status');
 
     if (!name)    { setModalStatus('Please enter your name! 😊', 'error'); return; }
     if (!message) { setModalStatus('Please write a birthday message for Gabby! 🎀', 'error'); return; }
@@ -1889,16 +1983,37 @@
 
       if (!res.ok) throw new Error();
 
-      // Message saved — now close modal, reload wall, open Square
-      closeModal();
       loadMessages();
-      window.open(SQUARE_URL, '_blank');
+      // Slide to step 2
+      document.getElementById('modal-step-1').classList.remove('active');
+      document.getElementById('modal-step-2').classList.add('active');
 
     } catch(e) {
       btn.disabled = false;
-      btn.textContent = '🎂 Post Message & Go Donate!';
+      btn.textContent = 'Next — Choose How to Pay →';
       setModalStatus('Something went wrong — please try again! 💙', 'error');
     }
+  }
+
+  // ── STEP 2 PAYMENT CHOICE ──────────────────────
+  function payWith(method) {
+    const handles = ['zelle','cashapp','venmo','paypal','cash'];
+
+    if (method === 'square') {
+      closeModal();
+      window.open(SQUARE_URL, '_blank');
+      return;
+    }
+
+    // Toggle handle card for non-Square options
+    handles.forEach(h => {
+      const card = document.getElementById(`handle-${h}`);
+      if (h === method) {
+        card.classList.toggle('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+    });
   }
 
   function setModalStatus(msg, type) {
