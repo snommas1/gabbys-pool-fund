@@ -82,15 +82,15 @@
     display: inline-block;
     background: var(--coral);
     color: white;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 13px;
-    padding: 6px 18px;
-    border-radius: 20px;
-    margin-bottom: 16px;
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(22px, 5vw, 34px);
+    padding: 14px 36px;
+    border-radius: 50px;
+    margin-bottom: 18px;
     position: relative;
     z-index: 2;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    box-shadow: 0 6px 20px rgba(255,138,128,0.45);
     animation: wiggle 2s ease-in-out infinite;
   }
 
@@ -826,6 +826,100 @@
     word-break: break-all;
   }
 
+  /* ===== PAYMENT METHODS ===== */
+  .payment-methods-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+  }
+
+  .payment-methods-section .pm-intro {
+    font-size: 15px;
+    color: #718096;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .pm-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pm-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    border: 2px solid #EDF2F7;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pm-card:hover { transform: translateY(-2px); }
+
+  .pm-card.pm-zelle   { border-color: #6B2D8B; background: #FAF5FF; }
+  .pm-card.pm-cashapp { border-color: #00C244; background: #F0FFF4; }
+  .pm-card.pm-venmo   { border-color: #3D95CE; background: #EBF8FF; }
+  .pm-card.pm-paypal  { border-color: #003087; background: #EBF4FF; }
+  .pm-card.pm-cash    { border-color: #C6A630; background: #FFFFF0; }
+
+  .pm-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+
+  .pm-logo.logo-zelle   { background: #6B2D8B; color: white; font-family: 'Fredoka One', cursive; font-size: 18px; }
+  .pm-logo.logo-cashapp { background: #00C244; color: white; font-size: 28px; }
+  .pm-logo.logo-venmo   { background: #3D95CE; color: white; font-family: 'Fredoka One', cursive; font-size: 16px; }
+  .pm-logo.logo-paypal  { background: #003087; color: #009CDE; font-family: 'Fredoka One', cursive; font-size: 18px; }
+  .pm-logo.logo-cash    { background: #C6A630; color: white; font-size: 26px; }
+
+  .pm-info { flex: 1; }
+
+  .pm-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 3px;
+  }
+
+  .pm-handle {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    color: #4A5568;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .pm-note {
+    font-size: 12px;
+    color: #A0AEC0;
+    font-weight: 600;
+  }
+
+  .pm-fee-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .fee-free   { background: #C6F6D5; color: #276749; }
+  .fee-small  { background: #FEF3C7; color: #92400E; }
+
   /* ===== FINE PRINT ===== */
   .fine-print {
     text-align: center;
@@ -966,7 +1060,7 @@
   </div>
 
   <!-- BIG DONATE BUTTON -->
-  <a href="YOUR_SQUARE_LINK_HERE" class="big-donate-btn anim-in" target="_blank" rel="noopener">
+  <a href="https://square.link/u/l9uHyVIh" class="big-donate-btn anim-in" target="_blank" rel="noopener">
     💦 Make a Splash — Donate Now! 💦
   </a>
 
@@ -1019,7 +1113,7 @@
             </div>
           </div>
         </div>
-        <a href="YOUR_SQUARE_LINK_10" class="tier-donate-btn btn-splash" target="_blank" rel="noopener">
+        <a href="https://square.link/u/l9uHyVIh" class="tier-donate-btn btn-splash" target="_blank" rel="noopener">
           Donate $10 — Make a Splash 💧 <span class="sq-icon">⬛</span>
         </a>
       </div>
@@ -1038,7 +1132,7 @@
             </div>
           </div>
         </div>
-        <a href="YOUR_SQUARE_LINK_25" class="tier-donate-btn btn-cannonball" target="_blank" rel="noopener">
+        <a href="https://square.link/u/l9uHyVIh" class="tier-donate-btn btn-cannonball" target="_blank" rel="noopener">
           Donate $25 — CANNONBALL! 💣 <span class="sq-icon">⬛</span>
         </a>
       </div>
@@ -1057,7 +1151,7 @@
             </div>
           </div>
         </div>
-        <a href="YOUR_SQUARE_LINK_50" class="tier-donate-btn btn-belly" target="_blank" rel="noopener">
+        <a href="https://square.link/u/l9uHyVIh0" class="tier-donate-btn btn-belly" target="_blank" rel="noopener">
           Donate $50 — Belly Flop Time 🤿 <span class="sq-icon">⬛</span>
         </a>
       </div>
@@ -1076,7 +1170,7 @@
             </div>
           </div>
         </div>
-        <a href="YOUR_SQUARE_LINK_100" class="tier-donate-btn btn-shark" target="_blank" rel="noopener">
+        <a href="https://square.link/u/l9uHyVIh0" class="tier-donate-btn btn-shark" target="_blank" rel="noopener">
           Donate $100 — Go Full Shark 🦈 <span class="sq-icon">⬛</span>
         </a>
       </div>
@@ -1095,7 +1189,7 @@
             </div>
           </div>
         </div>
-        <a href="YOUR_SQUARE_LINK_200" class="tier-donate-btn btn-whale" target="_blank" rel="noopener">
+        <a href="https://square.link/u/l9uHyVIh" class="tier-donate-btn btn-whale" target="_blank" rel="noopener">
           Donate $200+ — Whale Status 🐳 <span class="sq-icon">⬛</span>
         </a>
       </div>
@@ -1108,13 +1202,13 @@
     <h3>🎁 Or Pick Your Own Amount</h3>
     <p>Every dollar counts — even $5 gets us closer to cannonball season!</p>
     <div class="quick-amounts">
-      <a href="YOUR_SQUARE_LINK_5" class="quick-amt-btn" target="_blank" rel="noopener">$5</a>
-      <a href="YOUR_SQUARE_LINK_15" class="quick-amt-btn" target="_blank" rel="noopener">$15</a>
-      <a href="YOUR_SQUARE_LINK_35" class="quick-amt-btn" target="_blank" rel="noopener">$35</a>
-      <a href="YOUR_SQUARE_LINK_75" class="quick-amt-btn" target="_blank" rel="noopener">$75</a>
-      <a href="YOUR_SQUARE_LINK_150" class="quick-amt-btn" target="_blank" rel="noopener">$150</a>
+      <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$5</a>
+      <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$15</a>
+      <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$35</a>
+      <a href="https://square.link/u/l9uHyVIh" class="quick-amt-btn" target="_blank" rel="noopener">$75</a>
+      <a href="https://square.link/u/l9uHyVIh0" class="quick-amt-btn" target="_blank" rel="noopener">$150</a>
     </div>
-    <a href="YOUR_SQUARE_LINK_CUSTOM" class="custom-send-btn" target="_blank" rel="noopener">
+    <a href="https://square.link/u/l9uHyVIh" class="custom-send-btn" target="_blank" rel="noopener">
       💚 Choose Your Own Amount 💚
     </a>
     <div class="square-powered">
@@ -1236,8 +1330,69 @@
     <span class="verified-badge">✓ Family</span>
   </div>
 
+  <!-- PAYMENT METHODS -->
+  <div class="payment-methods-section anim-in">
+    <h2 class="section-label">💳 Ways to Send Money</h2>
+    <p class="pm-intro">No credit card? No problem! Pick whatever's easiest for you — Zelle, Cash App, and Venmo are all 100% free and most people already have them. Just send your amount and add <strong>"Gabby's Pool 🏊"</strong> in the note so we can track it!</p>
+
+    <div class="pm-grid">
+
+      <div class="pm-card pm-zelle">
+        <div class="pm-logo logo-zelle">Z</div>
+        <div class="pm-info">
+          <div class="pm-name">Zelle</div>
+          <div class="pm-handle">📧 [YOUR EMAIL OR PHONE]</div>
+          <div class="pm-note">Sends directly bank-to-bank · Usually instant · Built into most banking apps</div>
+        </div>
+        <span class="pm-fee-badge fee-free">✓ Free</span>
+      </div>
+
+      <div class="pm-card pm-cashapp">
+        <div class="pm-logo logo-cashapp">$</div>
+        <div class="pm-info">
+          <div class="pm-name">Cash App</div>
+          <div class="pm-handle">$[YOUR CASHTAG]</div>
+          <div class="pm-note">Search your $Cashtag in the app and send any amount</div>
+        </div>
+        <span class="pm-fee-badge fee-free">✓ Free</span>
+      </div>
+
+      <div class="pm-card pm-venmo">
+        <div class="pm-logo logo-venmo">V</div>
+        <div class="pm-info">
+          <div class="pm-name">Venmo</div>
+          <div class="pm-handle">@[YOUR VENMO USERNAME]</div>
+          <div class="pm-note">Search your username in Venmo · Set memo to "Gabby's Pool 🏊"</div>
+        </div>
+        <span class="pm-fee-badge fee-free">✓ Free</span>
+      </div>
+
+      <div class="pm-card pm-paypal">
+        <div class="pm-logo logo-paypal">PP</div>
+        <div class="pm-info">
+          <div class="pm-name">PayPal</div>
+          <div class="pm-handle">📧 [YOUR PAYPAL EMAIL]</div>
+          <div class="pm-note">Use "Send to a Friend" (not Goods &amp; Services) to avoid fees</div>
+        </div>
+        <span class="pm-fee-badge fee-free">✓ Free*</span>
+      </div>
+
+      <div class="pm-card pm-cash">
+        <div class="pm-logo logo-cash">💵</div>
+        <div class="pm-info">
+          <div class="pm-name">Cash in Person</div>
+          <div class="pm-handle">Hand it to Tata or any family member at the party 🎉</div>
+          <div class="pm-note">Old school still works! 100% of it goes straight to the pool.</div>
+        </div>
+        <span class="pm-fee-badge fee-free">✓ Free</span>
+      </div>
+
+    </div>
+  </div>
+
   <!-- BOTTOM DONATE -->
-  <a href="YOUR_SQUARE_LINK_CUSTOM" class="big-donate-btn" target="_blank" rel="noopener">
+
+  <a href="https://square.link/u/l9uHyVIh" class="big-donate-btn" target="_blank" rel="noopener">
     🎉 Donate to Gabby's Pool Fund 🎉
   </a>
 
@@ -1254,11 +1409,11 @@
     </div>
     <div class="setup-step">
       <span class="step-num">3</span>
-      <div>Each link looks like: <code>https://square.link/u/AbCdEfGh</code> — copy each one and replace each <code>YOUR_SQUARE_LINK_10</code>, <code>YOUR_SQUARE_LINK_25</code>, etc.</div>
+      <div>Each link looks like: <code>https://square.link/u/AbCdEfGh</code> — copy each one and replace each <code>https://square.link/u/l9uHyVIh</code>, <code>https://square.link/u/l9uHyVIh</code>, etc.</div>
     </div>
     <div class="setup-step">
       <span class="step-num">4</span>
-      <div>For <code>YOUR_SQUARE_LINK_CUSTOM</code>, create a Square link that lets the buyer enter their own amount (choose "Customer decides price")</div>
+      <div>For <code>https://square.link/u/l9uHyVIh</code>, create a Square link that lets the buyer enter their own amount (choose "Customer decides price")</div>
     </div>
     <div class="setup-step">
       <span class="step-num">5</span>
