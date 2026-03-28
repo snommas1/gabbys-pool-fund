@@ -5,26 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gabby's Big Splash Fund 🏊‍♀️</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏊</text></svg>">
-
-<!-- Primary Meta -->
-<meta name="description" content="Gabby is turning 7 and has one birthday wish — her very own pool! Help our family make her dream come true this summer in Tucson. Every dollar counts!">
-
-<!-- Open Graph — Facebook, WhatsApp, LinkedIn, iMessage -->
-<meta property="og:type"        content="website">
-<meta property="og:url"         content="https://bit.ly/pool4gabby">
-<meta property="og:title"       content="She wants a POOL. Help Gabby's birthday dream come true!">
-<meta property="og:description" content="Gabby turns 7 this summer and has ONE wish — a pool! The whole family is chipping in. Join us! Goal: $1,500. Tucson, AZ.">
-<meta property="og:image"       content="https://snommas1.github.io/gabbys-pool-fund/og-image.png">
-<meta property="og:image:width"  content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name"   content="Gabby's Big Splash Fund">
-
-<!-- Twitter / X Card -->
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:url"         content="https://bit.ly/pool4gabby">
-<meta name="twitter:title"       content="She wants a POOL. Help Gabby's birthday dream come true!">
-<meta name="twitter:description" content="Gabby turns 7 this summer and has ONE wish — a pool! The whole family is chipping in. Join us! Goal: $1,500. Tucson, AZ.">
-<meta name="twitter:image"       content="https://snommas1.github.io/gabbys-pool-fund/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1743,11 +1723,11 @@
     <h3>📣 Help Gabby's Pool Dream Go Viral!</h3>
     <p style="font-size:14px;color:#718096;margin-bottom:14px;">Every share = closer to cannonball season 🌊</p>
     <div class="share-btns">
-      <button class="share-btn fb"  onclick="shareFacebook()">Facebook</button>
-      <button class="share-btn ig"  onclick="shareInstagram()">Instagram</button>
-      <button class="share-btn wa"  onclick="shareWhatsApp()">WhatsApp</button>
-      <button class="share-btn txt" onclick="shareText()">Text</button>
-      <button class="share-btn em"  onclick="shareEmail()">Email</button>
+      <button class="share-btn fb">Facebook</button>
+      <button class="share-btn ig">Instagram</button>
+      <button class="share-btn wa">WhatsApp</button>
+      <button class="share-btn txt">Text</button>
+      <button class="share-btn em">Email</button>
     </div>
   </div>
 
@@ -1869,7 +1849,7 @@
           </button>
           <div class="pay-handle-card" id="handle-zelle">
             <strong>Zelle</strong><br>
-            📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e19295808298cf92808c8c8e8f92a1868c80888dcf828e8c">[email&#160;protected]</a><br>
+            📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88fbfce9ebf1a6fbe9e5e5e7e6fbc8efe5e9e1e4a6ebe7e5">[email&#160;protected]</a><br>
             <small>Send from your banking app · Add note "Gabby's Pool 🏊"</small>
           </div>
 
@@ -1902,7 +1882,7 @@
           </button>
           <div class="pay-handle-card" id="handle-paypal">
             <strong>PayPal</strong><br>
-            📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a393e2b293364392b27272524390a2d272b232664292527">[email&#160;protected]</a><br>
+            📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3b0b7a2a0baedb0a2aeaeacadb083a4aea2aaafeda0acae">[email&#160;protected]</a><br>
             <small>Or tap: <a href="https://py.pl/2EyPTI" target="_blank" style="color:var(--water-dark);">https://py.pl/2EyPTI</a></small><br>
             <small>Use "Send to a Friend" to avoid fees · Add note "Gabby's Pool 🏊"</small>
           </div>
@@ -2018,21 +1998,38 @@
 
   // ── STEP 2 PAYMENT CHOICE ──────────────────────
   function payWith(method) {
-    const handles = ['zelle','cashapp','venmo','paypal','cash'];
-
+    // Direct URL methods — open app and close modal
     if (method === 'square') {
       closeModal();
       window.open(SQUARE_URL, '_blank');
       return;
     }
+    if (method === 'cashapp') {
+      closeModal();
+      window.open('https://cash.app/$Snommas1103', '_blank');
+      return;
+    }
+    if (method === 'venmo') {
+      closeModal();
+      window.open('https://venmo.com/u/Stacy-Sammons', '_blank');
+      return;
+    }
+    if (method === 'paypal') {
+      closeModal();
+      window.open('https://py.pl/2EyPTI', '_blank');
+      return;
+    }
 
-    // Toggle handle card for non-Square options
+    // Zelle and Cash — no app URL, show handle card instead
+    const handles = ['zelle', 'cash'];
     handles.forEach(h => {
       const card = document.getElementById(`handle-${h}`);
-      if (h === method) {
-        card.classList.toggle('visible');
-      } else {
-        card.classList.remove('visible');
+      if (card) {
+        if (h === method) {
+          card.classList.toggle('visible');
+        } else {
+          card.classList.remove('visible');
+        }
       }
     });
   }
@@ -2043,38 +2040,7 @@
     el.className = `modal-status ${type}`;
   }
 
-  // ── SHARE BUTTONS ─────────────────────────────
-  const SHARE_URL = 'https://bit.ly/pool4gabby';
-  const SHARE_MSG = "Gabby turns 7 and wants ONE thing for her birthday — a pool! Help our family make it happen this summer in Tucson. Every dollar counts!";
-
-  function shareFacebook() {
-    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(SHARE_URL), '_blank', 'width=600,height=400');
-  }
-
-  function shareWhatsApp() {
-    window.open('https://wa.me/?text=' + encodeURIComponent(SHARE_MSG + ' ' + SHARE_URL), '_blank');
-  }
-
-  function shareText() {
-    window.open('sms:?body=' + encodeURIComponent(SHARE_MSG + ' ' + SHARE_URL));
-  }
-
-  function shareEmail() {
-    const subject = encodeURIComponent("Help Gabby get her pool for her 7th birthday!");
-    const body    = encodeURIComponent(SHARE_MSG + '\n\n' + SHARE_URL);
-    window.open('mailto:?subject=' + subject + '&body=' + body);
-  }
-
-  function shareInstagram() {
-    navigator.clipboard.writeText(SHARE_URL).then(() => {
-      const btn = document.querySelector('.share-btn.ig');
-      const orig = btn.textContent;
-      btn.textContent = 'Link Copied!';
-      setTimeout(() => btn.textContent = orig, 2500);
-    });
-  }
-
-
+  // ── BIRTHDAY WALL ─────────────────────────────
   async function loadMessages() {
     const list    = document.getElementById('wall-messages-list');
     const countEl = document.getElementById('message-count');
