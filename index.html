@@ -1465,6 +1465,8 @@
 </head>
 <body>
 
+<button class="lang-toggle" id="lang-btn" onclick="toggleLang()">🇲🇽 Español</button>
+
 <!-- HEADER -->
 <div class="header-zone">
   <div class="bubbles">
@@ -1570,8 +1572,8 @@
             </div>
           </div>
         </div>
-        <button onclick="openModal('💧 The Splash — $10','💧 La Salpicadura — $10')" class="tier-donate-btn btn-splash">
-          Pledge $10 — ¡Salpicadura! 💧
+        <button onclick="openModal('💧 The Splash — $10','💧 La Salpicadura — $10')" class="tier-donate-btn btn-splash" data-en="Pledge $10 — Make a Splash 💧" data-es="Prometer $10 — ¡Salpicadura! 💧">
+          Pledge $10 — Make a Splash 💧
         </button>
       </div>
 
@@ -1589,8 +1591,8 @@
             </div>
           </div>
         </div>
-        <button onclick="openModal('💣 The Cannonball — $25','💣 El Cañonazo — $25')" class="tier-donate-btn btn-cannonball">
-          Pledge $25 — ¡CAÑONAZO! 💣
+        <button onclick="openModal('💣 The Cannonball — $25','💣 El Cañonazo — $25')" class="tier-donate-btn btn-cannonball" data-en="Pledge $25 — CANNONBALL! 💣" data-es="Prometer $25 — ¡CAÑONAZO! 💣">
+          Pledge $25 — CANNONBALL! 💣
         </button>
       </div>
 
@@ -1608,8 +1610,8 @@
             </div>
           </div>
         </div>
-        <button onclick="openModal('🤿 The Belly Flop — $50','🤿 La Panza — $50')" class="tier-donate-btn btn-belly">
-          Pledge $50 — ¡La Panza! 🤿
+        <button onclick="openModal('🤿 The Belly Flop — $50','🤿 La Panza — $50')" class="tier-donate-btn btn-belly" data-en="Pledge $50 — Belly Flop Time 🤿" data-es="Prometer $50 — ¡Hora de la Panza! 🤿">
+          Pledge $50 — Belly Flop Time 🤿
         </button>
       </div>
 
@@ -1627,8 +1629,8 @@
             </div>
           </div>
         </div>
-        <button onclick="openModal('🦈 The Shark — $100','🦈 El Tiburón — $100')" class="tier-donate-btn btn-shark">
-          Pledge $100 — ¡Modo Tiburón! 🦈
+        <button onclick="openModal('🦈 The Shark — $100','🦈 El Tiburón — $100')" class="tier-donate-btn btn-shark" data-en="Pledge $100 — Go Full Shark 🦈" data-es="Prometer $100 — ¡Modo Tiburón! 🦈">
+          Pledge $100 — Go Full Shark 🦈
         </button>
       </div>
 
@@ -1646,8 +1648,8 @@
             </div>
           </div>
         </div>
-        <button onclick="openModal('🐳 The Whale — $200+','🐳 La Ballena — $200+')" class="tier-donate-btn btn-whale">
-          Pledge $200+ — ¡Modo Ballena! 🐳
+        <button onclick="openModal('🐳 The Whale — $200+','🐳 La Ballena — $200+')" class="tier-donate-btn btn-whale" data-en="Pledge $200+ — Whale Status 🐳" data-es="Prometer $200+ — ¡Modo Ballena! 🐳">
+          Pledge $200+ — Whale Status 🐳
         </button>
       </div>
 
@@ -1890,7 +1892,7 @@
     } else {
       if (title) title.textContent = 'Your pledge is on the wall! 🎉';
       if (msg)   msg.textContent   = "Gabby's going to love seeing your message! To make your pledge real, just bring it to the party — cash is always great — or reach out to Mama Mermaid (Leslie) and she'll figure out the easiest way for you. 💖";
-      if (cont)  cont.innerHTML    = '<strong>💸 Want to send it digitally?</strong><br>Zelle, Cash App, Venmo, PayPal — all good! Just contact <strong>Leslie (Mama Mermaid)</strong> directly and she'll take care of it. She's got you! 🧜‍♀️';
+      if (cont)  cont.innerHTML    = '<strong>💸 Want to send it digitally?</strong><br>Zelle, Cash App, Venmo, PayPal — all good! Just contact <strong>Leslie (Mama Mermaid)</strong> directly and she\'ll take care of it. She\'s got you! 🧜‍♀️';
       if (cbtn)  cbtn.textContent  = "Woohoo! See you at the party! 🏊‍♀️";
     }
   }
