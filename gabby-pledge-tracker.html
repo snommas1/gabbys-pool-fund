@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabby's Pledge Tracker 🏊‍♀️</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: #FFF8F0;
+    color: #2D3748;
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #4FC3F7, #0288D1);
+    border-radius: 20px;
+    padding: 28px 28px 24px;
+    margin-bottom: 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .header-left h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(22px, 5vw, 34px);
+    margin-bottom: 4px;
+  }
+
+  .header-left p {
+    font-size: 14px;
+    opacity: 0.85;
+  }
+
+  .refresh-btn {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.5);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .refresh-btn:hover { background: rgba(255,255,255,0.35); }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px 16px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #EDF2F7;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: 'Fredoka One', cursive;
+    font-size: 28px;
+    color: #0288D1;
+  }
+
+  .stat-value.small { font-size: 15px; font-family: 'Quicksand', sans-serif; font-weight: 700; color: #2D3748; }
+
+  /* TABLE */
+  .table-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border: 1px solid #EDF2F7;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .table-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #EDF2F7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .table-header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: #0288D1;
+  }
+
+  #last-updated {
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    background: #FAFAFA;
+    border-bottom: 1px solid #EDF2F7;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #F7F7F7;
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+
+  td {
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+
+  .td-name {
+    font-weight: 700;
+    color: #2D3748;
+    white-space: nowrap;
+  }
+
+  .td-from {
+    color: #718096;
+    white-space: nowrap;
+  }
+
+  .tier-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .td-message {
+    color: #4A5568;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 300px;
+  }
+
+  .td-date {
+    color: #999;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .empty-state {
+    padding: 48px 20px;
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+  }
+
+  .empty-state .emoji { font-size: 40px; display: block; margin-bottom: 12px; }
+
+  .loading-state {
+    padding: 48px 20px;
+    text-align: center;
+    color: #999;
+    font-size: 15px;
+  }
+
+  /* EXPORT */
+  .export-btn {
+    background: white;
+    border: 2px solid #0288D1;
+    color: #0288D1;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .export-btn:hover { background: #0288D1; color: white; }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #B0BEC5;
+    margin-top: 24px;
+    font-style: italic;
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .col-from, .col-tier { display: none; }
+    .td-message { max-width: 180px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>🏊‍♀️ Gabby's Pledge Tracker</h1>
+      <p>Private dashboard for Leslie & Tata · Auto-refreshes every 60 seconds</p>
+    </div>
+    <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card" style="border:2px solid #4FC3F7;">
+      <div class="stat-label">Total Pledged</div>
+      <div class="stat-value" id="stat-total" style="color:#0288D1;">—</div>
+      <div style="margin-top:10px;">
+        <div style="background:#EDF2F7; border-radius:20px; height:10px; overflow:hidden;">
+          <div id="progress-bar" style="height:100%; border-radius:20px; background:linear-gradient(90deg,#4FC3F7,#81E6D9); width:0%; transition:width 0.6s ease;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:4px; font-size:11px; font-weight:700; color:#999;">
+          <span id="progress-pct">0%</span>
+          <span>Goal: $1,500</span>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Pledges</div>
+      <div class="stat-value" id="stat-count">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Most Recent</div>
+      <div class="stat-value small" id="stat-recent">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Last Updated</div>
+      <div class="stat-value small" id="stat-time">—</div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+    <div class="table-header">
+      <h2>💝 All Pledges</h2>
+      <span id="last-updated"></span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th class="col-from">From</th>
+            <th class="col-tier">Tier</th>
+            <th>Birthday Message</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="pledge-body">
+          <tr>
+            <td colspan="6">
+              <div class="loading-state">Loading pledges... 🌊</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EXPORT -->
+  <div style="text-align:center; margin-bottom:16px;">
+    <button class="export-btn" onclick="exportCSV()">⬇ Download as CSV</button>
+  </div>
+
+  <div class="footer">
+    🦩 This tracker is for Gabby's family only · Data from Supabase 🦩
+  </div>
+
+</div>
+
+<script>
+  const GOAL = 1500;
+
+  function parseTierAmount(tier) {
+    if (!tier) return 0;
+    const match = tier.match(/\$(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  }
+
+  const SUPABASE_URL = 'https://hgynvqhososbxgkmdspm.supabase.co';
+  const ANON_KEY     = 'sb_publishable_4DFSbmDLuSVJ5ITbeeulaQ_KRb57yJo';
+  const API_URL      = `${SUPABASE_URL}/rest/v1/messages?order=created_at.asc`;
+
+  let allData = [];
+
+  const TIER_STYLES = {
+    '10':  { bg: '#E1F5FE', color: '#0277BD' },
+    '25':  { bg: '#FFF9C4', color: '#F57F17' },
+    '50':  { bg: '#FFEBEE', color: '#C62828' },
+    '100': { bg: '#EDE7F6', color: '#4527A0' },
+    '200': { bg: '#FCE4EC', color: '#AD1457' },
+  };
+
+  function tierStyle(tier) {
+    if (!tier) return { bg: '#F5F5F5', color: '#757575' };
+    const match = tier.match(/\$(\d+)/);
+    return match ? (TIER_STYLES[match[1]] || { bg: '#F5F5F5', color: '#757575' }) : { bg: '#F5F5F5', color: '#757575' };
+  }
+
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  async function loadData() {
+    const body = document.getElementById('pledge-body');
+    try {
+      const res = await fetch(API_URL, {
+        headers: {
+          'apikey': ANON_KEY,
+          'Authorization': `Bearer ${ANON_KEY}`
+        }
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      allData = await res.json();
+
+      const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('stat-count').textContent  = allData.length;
+      document.getElementById('stat-time').textContent   = now;
+      document.getElementById('last-updated').textContent = `Updated ${now}`;
+
+      const total = allData.reduce((sum, r) => sum + parseTierAmount(r.tier), 0);
+      const pct   = Math.min(Math.round((total / GOAL) * 100), 100);
+      document.getElementById('stat-total').textContent  = `$${total.toLocaleString()}`;
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-pct').textContent = pct + '% funded';
+
+      if (allData.length) {
+        const newest = allData[allData.length - 1];
+        const oldest = allData[0];
+        document.getElementById('stat-recent').textContent = newest.name || 'Unknown';
+      } else {
+        document.getElementById('stat-recent').textContent = 'None yet';
+        document.getElementById('stat-first').textContent  = 'None yet';
+      }
+
+      if (!allData.length) {
+        body.innerHTML = `<tr><td colspan="6"><div class="empty-state"><span class="emoji">🏊‍♀️</span>No pledges yet — share the link with the family!</div></td></tr>`;
+        return;
+      }
+
+      // Show newest first for display
+      const display = [...allData].reverse();
+      body.innerHTML = display.map((r, i) => {
+        const ts = tierStyle(r.tier);
+        return `<tr>
+          <td style="color:#999; font-size:12px; font-weight:700;">${display.length - i}</td>
+          <td class="td-name">${esc(r.name || '—')}</td>
+          <td class="td-from col-from">${esc(r.from_location || '—')}</td>
+          <td class="col-tier">
+            <span class="tier-badge" style="background:${ts.bg}; color:${ts.color};">${esc(r.tier || '—')}</span>
+          </td>
+          <td class="td-message">"${esc(r.message || '—')}"</td>
+          <td class="td-date">${fmtDate(r.created_at)}</td>
+        </tr>`;
+      }).join('');
+
+    } catch(e) {
+      body.innerHTML = `<tr><td colspan="6"><div class="empty-state"><span class="emoji">⚠️</span>Could not load pledges. Check your internet connection and try refreshing.</div></td></tr>`;
+      console.error(e);
+    }
+  }
+
+  function exportCSV() {
+    if (!allData.length) { alert('No pledges to export yet!'); return; }
+    const rows = [
+      ['#', 'Name', 'From', 'Tier', 'Message', 'Date'],
+      ...allData.map((r, i) => [
+        i + 1,
+        r.name || '',
+        r.from_location || '',
+        r.tier || '',
+        (r.message || '').replace(/,/g, ';'),
+        fmtDate(r.created_at)
+      ])
+    ];
+    const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `gabbys-pledges-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  loadData();
+  setInterval(loadData, 60000);
+</script>
+</body>
+</html>
